@@ -7,7 +7,7 @@ updatedAt: 2023-07-25 18:18:16.695000
 category: "쿠버네티스"
 ---
 
- ## Label과 Selector란?
+## Label과 Selector란?
 
 *label* 은 쿠버네티스 오브젝트(파드 등)에 첨부된 키와 값의 쌍이다. 오브젝트의 특성을 식별하는 데 사용되어 사용자에게 중요하지만, 코어 시스템에 직접적인 의미는 없다. 예를들어 어떤 service가 Deployment를 식별하기 위해서는 deployment에 label 존재하며, 이 label이 Service 명세에 selector 항목에 적혀있어, Service는 Deployment를 식별하게된다.
  

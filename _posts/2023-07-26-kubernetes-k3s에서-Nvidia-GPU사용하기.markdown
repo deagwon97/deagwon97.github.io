@@ -14,7 +14,7 @@ category: "쿠버네티스"
 <img alt="image" src="/images/9a468452-2fe2-4d76-bbe3-5bd95053ff88"/>
 [Image From: [https://developer.nvidia.com/blog/announcing-containerd-support-for-the-nvidia-gpu-operator/](https://developer.nvidia.com/blog/announcing-containerd-support-for-the-nvidia-gpu-operator/)]
 
- ### 1. nvidia gpu 확인
+### 1. nvidia gpu 확인
 
  내장 그래픽 카드로 UHD Graphics 620과  Nvidia GPU인 GTX 1050 Mobile 을  가지고 있다. 우선 lshw를 통해서 운영체제가 GPU를 인식하고 있는지 확인한다.
 
@@ -81,7 +81,7 @@ $ sudo apt update
 $ sudo apt upgrade
 $ sudo apt install nvidia-driver-510 nvidia-dkms-510
 
-$ sudo reboot # 드라이버가 gpu를 인식하기 위해서는 재부팅이 필요하다.
+$ sudo reboot# 드라이버가 gpu를 인식하기 위해서는 재부팅이 필요하다.
 ``````
 
  재부팅 후 nvidia-smi 커맨드를 실행하면, GPU에 대한 간략한 정보를 확인할 수 있는데, 이 정보가 나타난다는 것은 성공적으로 nvidia driver가 설치되었다는 뜻이다.
@@ -324,10 +324,10 @@ spec:
       - key: nvidia.com/gpu
         operator: Exists
         effect: NoSchedule
-      # Mark this pod as a critical add-on; when enabled, the critical add-on
-      # scheduler reserves resources for critical add-on pods so that they can
-      # be rescheduled after a failure.
-      # See https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/
+     # Mark this pod as a critical add-on; when enabled, the critical add-on
+     # scheduler reserves resources for critical add-on pods so that they can
+     # be rescheduled after a failure.
+     # See https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/
       priorityClassName: "system-node-critical"
       containers:
       - image: nvcr.io/nvidia/k8s-device-plugin:v0.12.3
@@ -359,8 +359,8 @@ $ kubectl apply -f nvidia-device-plugin.yml
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  # The name the RuntimeClass will be referenced by.
-  # RuntimeClass is a non-namespaced resource.
+ # The name the RuntimeClass will be referenced by.
+ # RuntimeClass is a non-namespaced resource.
   name: "nvidia"
 # The name of the corresponding CRI configuration
 handler: "nvidia"
@@ -384,9 +384,9 @@ metadata:
   name: gpu
 spec:
   restartPolicy: Never
-  runtimeClassName: "nvidia" # nvidia runtime 사용
+  runtimeClassName: "nvidia"# nvidia runtime 사용
   nodeSelector: 
-    gpu: nvidia # gpu가 장착된 node에만 배포
+    gpu: nvidia# gpu가 장착된 node에만 배포
   containers:
     - name: gpu
       image: "nvidia/cuda:11.4.1-base-ubuntu20.04"

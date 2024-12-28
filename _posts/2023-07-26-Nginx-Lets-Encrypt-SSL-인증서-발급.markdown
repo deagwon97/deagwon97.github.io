@@ -54,8 +54,8 @@ server {
  파일을 저장하고, 새롭게 정의한 defualt 파일이 문제가 없는지 확인 한 후, nginx를 시작합니다.
 
 ``````bash
-sudo nginx -t # 테스트
-sudo service nginx start # 실행
+sudo nginx -t# 테스트
+sudo service nginx start# 실행
 ``````
 
 ### Setup SSL
@@ -108,8 +108,8 @@ server {
         listen  443 ssl;
         server_name 도메인;
 
-        #access_log /var/log/nginx/proxy/access.log;
-        #error_log /var/log/nginx/proxy/error.log;
+       #access_log /var/log/nginx/proxy/access.log;
+       #error_log /var/log/nginx/proxy/error.log;
         
         ssl_certificate /etc/letsencrypt/live/도메인/fullchain.pem;
         ssl_certificate_key /etc/letsencrypt/live/도메인/privkey.pem;
@@ -134,8 +134,8 @@ server {
 ### Nginx 실행
 
 ``````bash
-sudo nginx -t # 테스트
-sudo service nginx restart # 실행
+sudo nginx -t# 테스트
+sudo service nginx restart# 실행
 ``````
 
 ### 로그 확인

@@ -58,7 +58,7 @@ enroot 를 설치하기 위해서는 커널 커맨드 및 커널 파라미터를
     [root@gate1 container]# ./enroot-check_*.run --verify 
     Kernel version:
     
-    Linux version 3.10.0-1127.el7.x86_64 (root@tgm-master.hpc) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) ) #1 SMP Thu May 7 14:42:14 KST 2020
+    Linux version 3.10.0-1127.el7.x86_64 (root@tgm-master.hpc) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) )#1 SMP Thu May 7 14:42:14 KST 2020
     
     Kernel configuration:
     
@@ -233,7 +233,7 @@ $# nvidia-container-cli -k info
 [root@gate1 container]# ./enroot-check_*.run --verify 
 Kernel version:
 
-Linux version 3.10.0-1127.el7.x86_64 (root@tgm-master.hpc) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) ) #1 SMP Thu May 7 14:42:14 KST 2020
+Linux version 3.10.0-1127.el7.x86_64 (root@tgm-master.hpc) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) )#1 SMP Thu May 7 14:42:14 KST 2020
 
 Kernel configuration:
 

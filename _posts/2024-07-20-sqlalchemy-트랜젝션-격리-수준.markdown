@@ -70,7 +70,7 @@ class MyDatabaseClass:
         self.db = SessionLocal()
 
     def get_aimodel_by_name(self, name):
-        self.db.expire_all()  # 모든 객체를 만료시켜 강제로 새로 고침
+        self.db.expire_all() # 모든 객체를 만료시켜 강제로 새로 고침
         query = self.db.query(schema.Aimodel).filter(schema.Aimodel.name == name)
         aimodel = query.first()
         return aimodel

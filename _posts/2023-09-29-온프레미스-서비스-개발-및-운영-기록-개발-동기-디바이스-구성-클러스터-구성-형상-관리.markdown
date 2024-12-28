@@ -100,9 +100,9 @@ CI/CD 구축을 위해서 사용한 도구들 입니다. 처음에는 Jenkins를
 # 프로비저닝 순서에 따라서 yaml 파일에 순서를 부여했습니다.
 production
 |-- 00namespace.yaml
-|-- 01dockerconfig.json # gitignore
+|-- 01dockerconfig.json# gitignore
 |-- 01dockerconfig.json.example
-|-- 01nextjs.env        # gitignore
+|-- 01nextjs.env       # gitignore
 |-- 01nextjs.env.example
 |-- 03serviceAccount.yaml
 |-- 04deployment.yaml

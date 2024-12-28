@@ -41,27 +41,27 @@ docker와 docke-compose를 통해서 이러한 문제를 하나씩 해결해보�
 ``````bash
 api
 │  .gitignore
-│  .proxy-companion.prod.env # 배포용에서 사용되는 nginx-proxy container 환경변수
-│  backend.dev.env # 개발용 컨테이너 환경 변수
-│  backend.prod.env # 배포용 컨테이너 환경 변수
-│  docker-compose.dev.yml # 개발용 docker-compose 파일
-│  docker-compose.prod.yml # 배포용 docker-compose 파일
+│  .proxy-companion.prod.env# 배포용에서 사용되는 nginx-proxy container 환경변수
+│  backend.dev.env# 개발용 컨테이너 환경 변수
+│  backend.prod.env# 배포용 컨테이너 환경 변수
+│  docker-compose.dev.yml# 개발용 docker-compose 파일
+│  docker-compose.prod.yml# 배포용 docker-compose 파일
 │  Dockerfile
 │  README.md
 │
 ├─dev-vscode
-│      launch.json # Dajngo 디버거를 정의
-│      settings.json # pylint, default python path등 vscode 세팅 정의
+│      launch.json# Dajngo 디버거를 정의
+│      settings.json# pylint, default python path등 vscode 세팅 정의
 │
 ├─nginx // nginx-proxy 컨테이너
-│  │  custom.conf # nginx-proxy 컨테이너의 nginx  conf.d 파일
-│  │  Dockerfile # custom.conf와 vhost.d 를 컨테이너 내부로 COPY
+│  │  custom.conf# nginx-proxy 컨테이너의 nginx  conf.d 파일
+│  │  Dockerfile# custom.conf와 vhost.d 를 컨테이너 내부로 COPY
 │  │
 │  └─vhost.d
-│          default # nginx-proxy 컨테이너의 nginx default 파일
+│          default# nginx-proxy 컨테이너의 nginx default 파일
 │
-└─src # Django의 소스 코드 
-	  # docker ignore를 통해서 분리할 수도 있지만 이런식으로 이미지속에 들어가는 소스 코드는 따로 분리하는 것을 선호한다.
+└─src# Django의 소스 코드 
+	 # docker ignore를 통해서 분리할 수도 있지만 이런식으로 이미지속에 들어가는 소스 코드는 따로 분리하는 것을 선호한다.
     │  manage.py
     │  requirements.txt
     │
@@ -91,7 +91,7 @@ api
     │  └─migrations
     │          __init__.py
     │
-    └─project # settings.py가 들어있는 django의 메인 폴더
+    └─project# settings.py가 들어있는 django의 메인 폴더
             asgi.py
             routing.py
             settings.py
@@ -116,16 +116,16 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     volumes:
-      - ./src:/workdir/src # 개발중에는 소스코드를 외부와 마운트해서 사용한다.
+      - ./src:/workdir/src# 개발중에는 소스코드를 외부와 마운트해서 사용한다.
       - ./dev-vscode:/workdir/.vscode# 미리 정의해둔 settings.json과 launch.json
     command: bash -c "cd /workdir/src && python -m pip install -r requirements.txt"
     ports:
       - 8000:8000
     env_file:
       - ./backend.dev.env# 개발에서 쓰이는 환경변수
-    stdin_open: true # docker run -i
-    tty: true # docker run -t
-    entrypoint: ['/bin/bash', '-c'] # /bin/bash를 띄워서 커널이 죽지 않도록 설정.
+    stdin_open: true# docker run -i
+    tty: true# docker run -t
+    entrypoint: ['/bin/bash', '-c']# /bin/bash를 띄워서 커널이 죽지 않도록 설정.
 ``````
 
 - backend.dev.env 파일 정의
@@ -162,7 +162,7 @@ STATE = os.environ.get("STATE")
 if int(os.environ.get("HTTPS")) == 1:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     USE_X_FORWARDED_HOST = True
-    SECURE_SSL_REDIRECT = True # http로 들어오면 https 로 redirect
+    SECURE_SSL_REDIRECT = True# http로 들어오면 https 로 redirect
 ``````
 
 - dev-vscode/launch.json 생성
@@ -277,14 +277,14 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-      # workers는 무조건 2개 이상 설정하는 것을 권장한다.
+     # workers는 무조건 2개 이상 설정하는 것을 권장한다.
     command: bash -c "cd ./src && gunicorn --workers=3 --bind 0.0.0.0:8000 --preload project.wsgi:application"
     expose:
       - 8000
     env_file:
       - ./backend.prod.env
 
-  nginx-proxy: # proxy 컨테이너
+  nginx-proxy:# proxy 컨테이너
     container_name: nginx-proxy
     restart: always
     build: ./nginx

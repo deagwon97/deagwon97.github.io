@@ -20,7 +20,7 @@ category: "운영체제/컴퓨터구조"
  여러 글들을 읽어보면 결국 프로그램은 **컴퓨터가 특정 동작을 수행하기위해 작성된 실행가능한 코드**을 의미한다.
  
 
- ## 1. 프로세스란?
+## 1. 프로세스란?
  
  > _Process란 하나 혹은 그 이상의 Thread로 실행되는 컴퓨터 프로그램의 instance이다. Process는 Program code와 그 activity를 포함한다.
  wikipedia_
@@ -112,7 +112,7 @@ Process Control Block은 커널의 데이터 영역 내에 존재한다.
  다시 원래 프로세스의 실행 순서가 돌아 왔을 때, 이전에 하던 작업을 PCB를 통해 그대로 복원할 수 있다.
 
 	
- ## Reference 
+## Reference 
  - https://www.studytonight.com/operating-system/operating-system-processes
  - https://docs.microsoft.com/en-us/windows/win32/com/processes--threads--and-apartments
  - https://en.wikipedia.org/wiki/Wait_state

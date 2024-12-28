@@ -107,20 +107,20 @@ namespace: argo-ci
 generatorOptions:
   disableNameSuffixHash: true
 resources:
-  # argo workflows
-  - namespace.yaml # namespace 생성
-  - https://github.com/argoproj/argo-workflows/releases/download/v3.4.5/install.yaml # argo workflows 설치
-  - workflow-rbac.yaml # argo workflows에 workflow pods을 조회, 수정, 생성, 삭제하는 권한 부여 (dashboard 조회용)
-  - rollout-rbac.yaml # argo workflows에 외부 deployment를 rollout restart 하기 위한 권한 부여
-  # argo events
+ # argo workflows
+  - namespace.yaml# namespace 생성
+  - https://github.com/argoproj/argo-workflows/releases/download/v3.4.5/install.yaml# argo workflows 설치
+  - workflow-rbac.yaml# argo workflows에 workflow pods을 조회, 수정, 생성, 삭제하는 권한 부여 (dashboard 조회용)
+  - rollout-rbac.yaml# argo workflows에 외부 deployment를 rollout restart 하기 위한 권한 부여
+ # argo events
   - https://raw.githubusercontent.com/argoproj/argo-events/stable/manifests/install.yaml
   - https://raw.githubusercontent.com/argoproj/argo-events/stable/manifests/install-validating-webhook.yaml
-  - event-source.yaml # github webhook을 감지하여 event bus로 전송
-  - event-bus.yaml # event source의 event를 event sensor로 전송
-  - event-sensor.yaml # event-sensor와 workflow를 모두 포함함. event bus에서 event가 전달되면, workflow를 실행.
-  - event-rbac.yaml # event sensor가 workflow를 생성할 수 있는 권한 부여
-  # ingress
-  - ingress.yaml # argo ci 의 대쉬보드, webhook listener를 외부로 배포.
+  - event-source.yaml# github webhook을 감지하여 event bus로 전송
+  - event-bus.yaml# event source의 event를 event sensor로 전송
+  - event-sensor.yaml# event-sensor와 workflow를 모두 포함함. event bus에서 event가 전달되면, workflow를 실행.
+  - event-rbac.yaml# event sensor가 workflow를 생성할 수 있는 권한 부여
+ # ingress
+  - ingress.yaml# argo ci 의 대쉬보드, webhook listener를 외부로 배포.
 patchesStrategicMerge:
   - argo-patch.yaml
 secretGenerator:
@@ -164,15 +164,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: argocd
 generatorOptions:
-  disableNameSuffixHash: true # traefik의 Ingress Router가 argocd service를 식별하기 위함.
+  disableNameSuffixHash: true# traefik의 Ingress Router가 argocd service를 식별하기 위함.
 resources:
-  - namespace.yaml # namespace 생성
+  - namespace.yaml# namespace 생성
   - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-  - ingress.yaml # dashboard를 외부에 배포하기위한 ingress 및 certificate, issuer 설정
-	- repository.yaml # Argocd의 Application에서 사용되는 github repository를 생성하는 yaml
-	- application.yaml # Argocd의 Application을 생성하는 yaml
+  - ingress.yaml# dashboard를 외부에 배포하기위한 ingress 및 certificate, issuer 설정
+	- repository.yaml# Argocd의 Application에서 사용되는 github repository를 생성하는 yaml
+	- application.yaml# Argocd의 Application을 생성하는 yaml
 patchesStrategicMerge:
-  - argocd-cmd-params-cm-patch.yml # argocd 생성 파라미터에서 server.insecure: "true" 으로 설정
+  - argocd-cmd-params-cm-patch.yml# argocd 생성 파라미터에서 server.insecure: "true" 으로 설정
 ``````
 
  argocd 폴더에서  ``kustomization applyo -k .``  커맨드를 실행하면, 설치부터 설정까지 한번에 완성됩니다!

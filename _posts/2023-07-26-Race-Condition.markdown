@@ -9,11 +9,11 @@ category: "운영체제/컴퓨터구조"
  Mutli Task를 수행하다보면 동일한 자원에 서로다른 task가 접근하는 상황이 생길 수 있다. 이때 Race Condition 혹은 Dead Lock과 같은 문제가 발생하기도 한다.
  잘알려진 자료구조인 Linked List를 통해서 Race Condition과 Dead Lock에 대해 알아보자.
  
- ## Race Condition
+## Race Condition
  > _Race Condition(경쟁 상태)이란 공유 자원에 대해 여러 개의 프로세스가 동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있는 상태를 말한다.
  wikipedia_
  
- ### Linked List
+### Linked List
  Linked List란 하나의 노드가 값과 다음 노드의 주소를 가지고 있는 자료구조이다. 
 
 <img alt="image" src="/images/455302c4-30ec-4ecd-9d79-99008711acb3"/>

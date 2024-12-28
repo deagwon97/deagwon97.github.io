@@ -48,12 +48,12 @@ category: "기타"
 
 glusterfs의 가장 기본적인 형태입니다. 저장할 파일들을 각각 서로다른 brick에 나누어 저장합니다. brick을 추가하는 만큼 저장공간을 그대로 확장할 수 있습니다. 또한 서로 다른 brick에 io 컨트롤러가 각각 존재한다면, 다중 파일의 IO 속도가 brick의 수 만큼 증가합니다. 한마디로 가장 안정성이 떨어지지만, 가장 높은 성능을 보이는 볼륨입니다.
 
-- 여러개의 파일들을 #bricks 만큼 나누어 각각의 brick에 저장
+- 여러개의 파일들을#bricks 만큼 나누어 각각의 brick에 저장
 - 하나의 brick 이라도 손실될 경우, 데이터 무결성이 깨짐
-- 전체 클러스터 용량 = 단일 brick 용량 * #bricks
+- 전체 클러스터 용량 = 단일 brick 용량 *#bricks
 - 네트워크 대역폭은 NFS와 동일하게 소비
 - 단일 파일 I/O 속도 = brick I/O 속도
-- 다중 파일 동시 I/O 속도 = brick I/O 속도 * #bricks (네트워크 속도는 고려하지 않음)
+- 다중 파일 동시 I/O 속도 = brick I/O 속도 *#bricks (네트워크 속도는 고려하지 않음)
 
 <img alt="image" src="/images/c232439e-a4b4-401c-bf19-d3db62f82387"/>
 
@@ -63,8 +63,8 @@ glusterfs의 가장 기본적인 형태입니다. 저장할 파일들을 각각 
 
 - 사용가능한 전체 클러스터 용량 = 단일 brick 용량
 - 다중/단일 파일 I/O 속도 = brick I/O 속도 - 파일 복제 속도
-- 네트워크 대역폭을 #bricks 배 소비
-- 파일을 #bricks 만큼 복제하여 각 brick에 저장
+- 네트워크 대역폭을#bricks 배 소비
+- 파일을#bricks 만큼 복제하여 각 brick에 저장
 - 모든 brick이 고장나지만 않으면 전체 데이터를 복구 가능
 
 
@@ -76,8 +76,8 @@ Dispersed glusterfs volume은 안정성과 가용성을 적절히 혼합한 형�
 
 - redundancy : 허용되는 실패 brick 수
 - 파일을 분할, 복제하는 overhead 존재
-- 전체 클러스터 용량 = 단일 brick 용량 * ( #bricks - redundancy )
-- 네트워크 대역폭을  #bricks / ( #bricks - redundancy ) 배 소비
+- 전체 클러스터 용량 = 단일 brick 용량 * (#bricks - redundancy )
+- 네트워크 대역폭을 #bricks / (#bricks - redundancy ) 배 소비
 - redundancy 만큼의 birck이 손실되어도 데이터 무결성(data integrity)이 유지
 - 파일 읽기 쓰기 속도 = 단일 brick 속도 *  (#bricks) / (redundancy + 1 + alpha)
     - alpha: 파일 분할, 복제 overhead
@@ -93,8 +93,8 @@ distributed 볼륨은 replicated 볼륨과 혼합하여 사용할 수 도 있습
 - distributed의 구성 요소로 brick이 아닌 replicated 스토리지를 사용
 - replicated set에서는 replicated 만큼 동일한 데이터를 복제
 - 전체 스토리지 용량
-    - 단일 brick 용량 * ( #bricks / replica 수 )
-- 네트워크 대역폭 ( #bricks / replica 수 ) 배 소비
+    - 단일 brick 용량 * (#bricks / replica 수 )
+- 네트워크 대역폭 (#bricks / replica 수 ) 배 소비
 - 단일 파일 I/O 속도 = 단일 brick 속도 - overhead
 - 다중 파일 I/O 속도 = 단일 파일 I/O 속도 * (distributed size)
 
@@ -302,7 +302,7 @@ test_io() {
     local bs=$2
     local separately_count=$3
 
-    # pids=()
+   # pids=()
     commands=()
 
     mkdir -p $vol
@@ -388,7 +388,7 @@ test_multiple_bs(){
     local vol=$1
     local separately_count=$2
     local i=1
-    # test_single_bs $vol 100M $separately_count
+   # test_single_bs $vol 100M $separately_count
      i=1; while [ $i -le 512 ]
         do 
             test_single_bs $vol NULLk $separately_count
@@ -526,9 +526,9 @@ PIPE=my_sync_pipe
 mkfifo $PIPE
 for i in $(seq 1 $NUM_PROCESSES); do
     (
-        # Named Pipe에서 데이터를 읽기 위해 대기
+       # Named Pipe에서 데이터를 읽기 위해 대기
         read -r < $PIPE
-        # 실제 명령어 실행
+       # 실제 명령어 실행
         start_time=$(date +%s%N)
         echo $start_time
 
@@ -536,12 +536,12 @@ for i in $(seq 1 $NUM_PROCESSES); do
 done
 
 # 모든 프로세스가 Named Pipe에서 대기 상태일 때 데이터를 보냄
-sleep 2  # 대기 상태를 보장하기 위한 임시 슬립
+sleep 2 # 대기 상태를 보장하기 위한 임시 슬립
 for i in $(seq 1 $NUM_PROCESSES); do
     echo "Go" > $PIPE
 done
 
-wait  # 모든 백그라운드 프로세스가 완료될 때까지 대기
+wait # 모든 백그라운드 프로세스가 완료될 때까지 대기
 rm $PIPE
 
 # 차이 5m 598u 532ns / 100 = 0.05ms

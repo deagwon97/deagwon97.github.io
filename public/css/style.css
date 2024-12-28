@@ -96,18 +96,19 @@ code {
 	border-radius: 0.5rem;
 }
 
+img {
+	display: flex;
+	max-width: 80%;
+	margin: 10px auto;
+	object-fit: cover;
+	align-self: center;
+}
+
 .content {
 	margin: 0px auto;
 	max-width: 1024px;
 	flex: 1 1 auto;
 	padding: 0px 30px;
-	img {
-		display: flex;
-		max-width: 80%;
-		margin: 10px auto;
-		object-fit: cover;
-		align-self: center;
-	}
 	table {
 		border-collapse: collapse; 
 		margin: 20px auto; 
@@ -150,7 +151,7 @@ code {
 }
 
 .sidebar-brand > a {
-	font-size: 300%;
+	font-size: 250%;
 	font-family: 'Gelasio';
 	color:#fff;
 }
@@ -189,10 +190,22 @@ a.nav-item:hover { color:#777; }
 .badge::before { content: "("; }
 .badge::after { content: ")"; }
 
-.post-list > li {
+/* .post-content{
+	width: 50%; */
+/* } */
+
+.post-list {
+	/* not show list start */
+	padding: 0;
+	/* width: 100%; */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; 
+	list-style-type: none;
 }
 
 .post-link {
+	
 	margin-left: 10px;
 	font-size: 110%;
 	color:#333;
@@ -342,6 +355,18 @@ footer {
 		font-size: 0.9em;
 		line-height: 1.5;
 	}
+	.post {
+		width: 360px;
+		
+	}
+	img {
+		display: flex;
+		max-width: 100%;
+		margin: 10px auto;
+		object-fit: cover;
+		align-self: center;
+	}
+	
 
 	.content {
 		padding: 0px;
@@ -373,5 +398,20 @@ footer {
 		flex: 0 0 0px;
 		visibility: hidden;
 		display: none;
+	}
+	.utterances {
+		width: 250px;
+	}
+
+	table {
+		display: block;
+		max-width: 300px;
+		font-size: 0.7rem; 
+		overflow-x: auto;
+	  }
+	
+	th,td {
+		padding: 6px; 
+		font-size: 0.7rem; 
 	}
 }

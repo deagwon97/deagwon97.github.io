@@ -94,19 +94,22 @@ Ingress라는 규칙에 따라 Ingress Controller가 실행되며 ingress contro
 Ingress Controller에는 Nginx-Ingress, Traefik, Kong, HAproxy 등이 있고, 다음과 같은 차이점을 갖는다.
 
 
-|                 | NGINX                                                                           | Kong                                                           |
-| --------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| 지원하는 프로토콜       | http/https, http2, grpc, tcp/udp                                                | http/https, http2, grpc, tcp (l4)                              |
-| 구축 기반           | nginx/nginx plus                                                                | nginx                                                          |
-| 라우팅 로직          | host, path, header, method, query param (all with regex expect host)            | host, path, method, header \*                                  |
-| 범위              | Cluster or specified namespaces                                                 | Specified namespace                                            |
-| 로드 벨런싱 알고리즘     | round-robin, least-conn, ip-hash, hash, random, least-time\*, sticky sessions\* | weighted-round-robin, sticky sessions                          |
-| 인증 프로토콜         | Basic, Client cert, external Basic, external OAuth                              | Basic, HMAC, Key, LDAP, OAuth 2.0, PASETO, OpenID Connect \*\* |
-| GUI 지원          | Yes \* \*\*                                                                     | Yes \* \*\*                                                    |
-| Request Tracing | Yes                                                                             | Yes                                                            |
-| 24/7 기술 지원      | Yes \*                                                                          | Yes \*                                                         |
-*: 유료
-**: 모듈 설치 필요
+### NGINX vs Kong Feature Comparison
+
+| Feature                  | NGINX                                            | Kong                                        |
+|--------------------------|--------------------------------------------------|---------------------------------------------|
+| **Supported Protocols**  | http/https, http2, grpc, tcp/udp                 | http/https, http2, grpc, tcp (L4)          |
+| **Built On**             | nginx/nginx plus                                 | nginx                                       |
+| **Routing Logic**        | host, path, header, method, query param (regex except host) | host, path, method, header                 |
+| **Scope**                | Cluster or specified namespaces                  | Specified namespace                         |
+| **Load Balancing**       | round-robin, least-conn, ip-hash, hash, random, least-time*, sticky sessions* | weighted-round-robin, sticky sessions       |
+| **Authentication Protocols** | Basic, Client cert, external Basic, external OAuth | Basic, HMAC, Key, LDAP, OAuth 2.0, PASETO, OpenID Connect ** |
+| **GUI Support**          | Yes * **                                        | Yes * **                                   |
+| **Request Tracing**      | Yes                                             | Yes                                        |
+| **24/7 Technical Support** | Yes *                                          | Yes *                                      |
+
+\* 유료
+\*\* 모듈 설치 필요
 
 ([https://kubevious.io/blog/post/comparing-top-ingress-controllers-for-kubernetes](https://kubevious.io/blog/post/comparing-top-ingress-controllers-for-kubernetes)에 올라온 표를 옮겨왔다)
 

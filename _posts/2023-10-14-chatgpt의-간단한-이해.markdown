@@ -30,7 +30,7 @@ category: "기타"
 ## **transformer란?**
 
 - 자연어(글자, 말, 사람이 사용하는 문장)에서 의미(의미 벡터)를 추출하는 인공지능 모델
-- ****트랜스포머 모델은 문장 속 단어와 같은 순차 데이터 내의 관계를 추적해 맥락과 의미를 학습하는 신경망이다.****
+- 트랜스포머 모델은 문장 속 단어와 같은 순차 데이터 내의 관계를 추적해 맥락과 의미를 학습하는 신경망이다.
 - 용어
     - 고차원 벡터 공간: 정보를 수학적으로 표현한 것
         - 유사한 정보는 벡터 공간에서 가깝게 위치하며, 유사하지 않은 정보는 벡터 공간에서 멀리 위치한다.
@@ -51,7 +51,7 @@ category: "기타"
     - https://towardsdatascience.com/reinforcement-learning-an-introduction-to-the-concepts-applications-and-code-ced6fbfd882d
 - **How ChatGPT actually works**
     - https://www.assemblyai.com/blog/how-chatgpt-actually-works/
-- ****ChatGPT broke the Turing test — the race is on for new ways to assess AI****
+- **ChatGPT broke the Turing test — the race is on for new ways to assess AI**
     - https://www.nature.com/articles/d41586-023-02361-7
 - **GPT-4 Technical Report**
     - https://arxiv.org/pdf/2303.08774.pdf

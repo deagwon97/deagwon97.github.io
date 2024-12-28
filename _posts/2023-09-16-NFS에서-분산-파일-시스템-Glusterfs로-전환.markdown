@@ -57,7 +57,7 @@ glusterfs의 가장 기본적인 형태입니다. 저장할 파일들을 각각 
 
 <img alt="image" src="/images/c232439e-a4b4-401c-bf19-d3db62f82387"/>
 
-### 2. ****Replicated Glusterfs Volume****
+### 2. Replicated Glusterfs Volume
 
 극단적인 안정성을 추구하는 볼륨입니다. 모든 파일들을 각 brick에 저장합니다. 따라서 모든 brick이 동시에 고장나지 않는 이상 전체 데이터의 무결성이 지켜집니다. 하지만, brick 수를 늘리더라도 저장할 수 있는 데이터의 양은 고정됩니다. 또한 파일을 복제하는 overhead와 네트워크 사용량의 증가로 IO 속도는 감소합니다.
 
@@ -101,7 +101,7 @@ distributed 볼륨은 replicated 볼륨과 혼합하여 사용할 수 도 있습
 
 <img alt="image" src="/images/76dd6c12-40b9-4119-91d4-2367aca50d3b"/>
 
-### 5. ****Distributed Dispersed Glusterfs V****olume
+### 5. Distributed Dispersed Glusterfs Volume
 
 마지막 조합은 distributed와 dispersed를 결합한 volume입니다. distributed replicated volume과 다르게 distributed set의 brick들은 dispersed volume으로 구성됩니다.  
 

@@ -73,13 +73,13 @@ category: "쿠버네티스"
  제가 만든 argo workflow는 간단하게 2가지 스텝을 가집니다. build step을 통해서 app의 컨테이너 이미지를 빌드하고, deploy step에서 kubectl 커맨드로 앱을 배포합니다. argo rollout을 사용할 수도 있지만, kubectl 커맨드를 사용하는 것만으로도 충분하다고 판단했습니다.
 
 - Build Step
-    - image: ****csanchez/kaniko****
+    - image: csanchez/kaniko
     - 용도
         1. Github에서 소스코드를 Pull
         2. 새로운 컨테이너 이미지를 빌드
         3. harbor registry에 이미지를 Push
 - Deploy Step
-    - image: ****bitnami/kubectl****
+    - image: bitnami/kubectl
     - 용도
         - ``kubectl rollout restart deployment <name> -n <namespace>`` 커맨드를 통해 앱 배포
 

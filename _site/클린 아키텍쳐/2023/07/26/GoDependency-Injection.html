@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="bdg-blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>bdg-blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/">bdg-blog</a>
+	</div>
+	<p class="lead"></p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#쿠버네티스">
+				<span class="name">쿠버네티스</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#기타">
+				<span class="name">기타</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#운영체제/컴퓨터구조">
+				<span class="name">운영체제/컴퓨터구조</span>
+				<span class="badge">7</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#백앤드">
+				<span class="name">백앤드</span>
+				<span class="badge">5</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#컨테이너">
+				<span class="name">컨테이너</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Go">
+				<span class="name">Go</span>
+				<span class="badge">6</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 아키텍쳐">
+				<span class="name">클린 아키텍쳐</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#보안">
+				<span class="name">보안</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#리눅스">
+				<span class="name">리눅스</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#네트워크">
+				<span class="name">네트워크</span>
+				<span class="badge">4</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#자바스크립트">
+				<span class="name">자바스크립트</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 코드">
+				<span class="name">클린 코드</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			[Go]Dependency Injection
+		</div>
+		<time class="post-date dt-published" datetime="2023-07-26T19:53:51+09:00" itemprop="datePublished">2023/07/26
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<h1 id="dependency-injection">Dependency Injection</h1>
+
+<p>Dependency Injection 의존성 주입, 의존관계 주입 이란 무엇일까?</p>
+
+<h2 id="dependency란">Dependency란?</h2>
+
+<p>A의 변화가 B에 영향을 준다면 B는 A에 의존한다.</p>
+
+<p><img alt="image" src="/images/87eb45f2-bc53-4d05-8279-55de36a1689c" /></p>
+
+<p>A가 변할 경우 B는 영향을 받는다. 즉, B는 A에 의존한다. 이런 경우 B를 생성하고 실행하기 위해서는 A가 있어야한다.</p>
+
+<p>A, B 보다 직관 적인 예시를 살펴보자. 편지와 우체국의 관계는 살펴보면 우체국은 편지가 있어야 존재할 수 있다. 즉 편지에 의존한다.코드를 살펴보자.</p>
+
+<p><img alt="image" src="/images/8e65180e-4680-4c24-b700-7600c72f28e3" /></p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Letter </span>
+<span class="k">type</span> <span class="n">Letter</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Message</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">letter</span> <span class="o">*</span><span class="n">Letter</span><span class="p">)</span> <span class="n">PrintLetter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">letter</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c">// Letter 생성자</span>
+<span class="k">func</span> <span class="n">NewLetter</span><span class="p">(</span><span class="n">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">Letter</span><span class="p">{</span><span class="n">Message</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Post</span>
+<span class="k">type</span> <span class="n">Post</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">letter</span> <span class="n">Letter</span>
+<span class="p">}</span>
+<span class="k">type</span> <span class="p">(</span><span class="n">post</span> <span class="o">*</span><span class="n">Post</span><span class="p">)</span> <span class="n">PrintPost</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">post</span><span class="o">.</span><span class="n">letter</span><span class="o">.</span><span class="n">PrintLetter</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c">// Post 생성자</span>
+<span class="k">func</span> <span class="n">NewPost</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="n">letter</span> <span class="o">=</span> <span class="n">NewLetter</span><span class="p">(</span><span class="s">"hihihi"</span><span class="p">)</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">Post</span><span class="p">{</span><span class="n">letter</span><span class="o">:</span> <span class="n">letter</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">// main</span>
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">post</span> <span class="o">:=</span> <span class="n">NewPost</span><span class="p">()</span>
+	<span class="n">post</span><span class="o">.</span><span class="n">PrintPost</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>위의 코드는 Post 객체가 생성되는 순간에 생성자 내부에서 NewLetter를 호출하여 Letter 객체를 생성한다.</p>
+
+<p>이러한 구조에서는 Letter객체와 Post객체가 강하게 결합하여 여러가지 말썽을 일으킨다.</p>
+
+<h2 id="dependency-injection-적용하기">Dependency Injection 적용하기</h2>
+
+<p>Dependency Injection은 이러한 문제를 일부해소해 주는데, 코드를 통해서 어떻게 DI를 적용할 수 있는지 알아보자.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Letter </span>
+<span class="k">type</span> <span class="n">Letter</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Message</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">letter</span> <span class="o">*</span><span class="n">Letter</span><span class="p">)</span> <span class="n">PrintLetter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">letter</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c">// Letter 생성자</span>
+<span class="k">func</span> <span class="n">NewLetter</span><span class="p">(</span><span class="n">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">Letter</span><span class="p">{</span><span class="n">Message</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">// Post</span>
+<span class="k">type</span> <span class="n">Post</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">letter</span> <span class="n">Letter</span>
+<span class="p">}</span>
+<span class="k">type</span> <span class="p">(</span><span class="n">post</span> <span class="o">*</span><span class="n">Post</span><span class="p">)</span> <span class="n">PrintPost</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">post</span><span class="o">.</span><span class="n">letter</span><span class="o">.</span><span class="n">PrintLetter</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c">// Post 생성자</span>
+<span class="c">// Post 객체를 생성하는 시점에 letter객체를 생성하지 않는다.</span>
+<span class="c">// letter 객체는 외부에서 주입(Injection)한다.</span>
+<span class="k">func</span> <span class="n">NewPost</span><span class="p">(</span><span class="n">letter</span> <span class="o">*</span><span class="n">Letter</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c">//letter = NewLetter("hihihi")</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">Post</span><span class="p">{</span><span class="n">letter</span><span class="o">:</span> <span class="n">letter</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">letter</span> <span class="o">=</span> <span class="n">NewLetter</span><span class="p">(</span><span class="s">"hihihi"</span><span class="p">)</span>
+	<span class="n">post</span> <span class="o">:=</span> <span class="n">NewPost</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+	<span class="n">post</span><span class="o">.</span><span class="n">PrintPost</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>위와 같은 방법으로 DI를 구현 하였지만, 크게 와닫지 않는다. 아직도 letter가 변경될 경우, Post의 생성자를 수정해 주어야하고, 두 클래스가 강하게 결합되어 있다는 인상을 준다.</p>
+
+<h2 id="-다형성">+ 다형성</h2>
+
+<p>Go의 다형성을 통해서 효과적인 DI를 구현해 보자.</p>
+
+<p>원래 Letter는 구조체, 메소드, 생성자로 구성되어 있었다.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Letter </span>
+<span class="k">type</span> <span class="n">Letter</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Message</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="c">// Letter Method</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">letter</span> <span class="o">*</span><span class="n">Letter</span><span class="p">)</span> <span class="n">PrintLetter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">letter</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c">// Letter 생성자</span>
+<span class="k">func</span> <span class="n">NewLetter</span><span class="p">(</span><span class="n">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">Letter</span><span class="p">{</span><span class="n">Message</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이러한 구조를 interface를 활용하여 다음과 같이 PrintLetter의 형식을 공유하는 LoveLetter와 LawyerLetter 클래스를 만들 수 있다.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Letter </span>
+<span class="k">type</span> <span class="n">Letter</span> <span class="k">interface</span> <span class="p">{</span>
+  <span class="n">PrintLetter</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c">// LoveLetter </span>
+<span class="k">type</span> <span class="n">LoveLetter</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Message</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">LoveLetter</span><span class="p">)</span> <span class="n">PrintLetter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">Message</span> <span class="o">+</span> <span class="s">" I love you."</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">NewLoveLetter</span><span class="p">(</span><span class="n">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">LoveLetter</span><span class="p">{</span><span class="n">Message</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">// LawyerLetter </span>
+<span class="k">type</span> <span class="n">LawyerLetter</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Message</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span><span class="n">LawyerLetter</span><span class="p">)</span> <span class="n">PrintLetter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">Message</span> <span class="o">+</span> <span class="s">" You are fire"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">NewLawyerLetter</span><span class="p">(</span><span class="n">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">LawyerLetter</span><span class="p">{</span><span class="n">Message</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>LoveLetter와 LawyerLetter는 모두 Letter를 타입으로 갖는다.  즉, 다음과 같은 방법으로 생성할 수 있다.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">loveLetter</span><span class="p">,</span> <span class="n">lawyerLetter</span> <span class="n">Letter</span>
+<span class="n">loveLetter</span> <span class="o">=</span> <span class="n">NewLoveLetter</span><span class="p">(</span><span class="s">"hello!"</span><span class="p">);</span>
+<span class="n">lawyerLetter</span> <span class="o">=</span> <span class="n">NewLawyerLetter</span><span class="p">(</span><span class="s">"hi!"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이제 다시 위의 DI예제에 이를 적용해보자.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Letter </span>
+<span class="k">type</span> <span class="n">Letter</span> <span class="k">interface</span> <span class="p">{</span>
+  <span class="n">PrintLetter</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c">// LoveLetter </span>
+<span class="k">type</span> <span class="n">LoveLetter</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Message</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">l</span> <span class="o">*</span><span class="n">LoveLetter</span><span class="p">)</span> <span class="n">PrintLetter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">Message</span> <span class="o">+</span> <span class="s">" I love you."</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">NewLoveLetter</span><span class="p">(</span><span class="n">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">LoveLetter</span><span class="p">{</span><span class="n">Message</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">// LawyerLetter </span>
+<span class="k">type</span> <span class="n">LawyerLetter</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Message</span> <span class="kt">string</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span><span class="n">LawyerLetter</span><span class="p">)</span> <span class="n">PrintLetter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">Message</span> <span class="o">+</span> <span class="s">" You are fire"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">NewLawyerLetter</span><span class="p">(</span><span class="n">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">LawyerLetter</span><span class="p">{</span><span class="n">Message</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">// Post</span>
+<span class="k">type</span> <span class="n">Post</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">letter</span> <span class="n">Letter</span>
+<span class="p">}</span>
+<span class="k">type</span> <span class="p">(</span><span class="n">post</span> <span class="o">*</span><span class="n">Post</span><span class="p">)</span> <span class="n">PrintPost</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">post</span><span class="o">.</span><span class="n">letter</span><span class="o">.</span><span class="n">PrintLetter</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c">// Post 생성자</span>
+<span class="c">// Post 객체를 생성하는 시점에 letter객체를 생성하지 않는다.</span>
+<span class="c">// letter 객체는 외부에서 주입(Injection)한다.</span>
+<span class="k">func</span> <span class="n">NewPost</span><span class="p">(</span><span class="n">letter</span> <span class="o">*</span><span class="n">Letter</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">Post</span><span class="p">{</span><span class="n">letter</span><span class="o">:</span> <span class="n">letter</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="c">// letter 객체들 생성</span>
+	<span class="k">var</span> <span class="n">loveLetter</span><span class="p">,</span> <span class="n">lawyerLetter</span> <span class="n">Letter</span>
+	<span class="n">loveLetter</span> <span class="o">=</span> <span class="n">NewLoveLetter</span><span class="p">(</span><span class="s">"hello!"</span><span class="p">);</span>
+	<span class="n">lawyerLetter</span> <span class="o">=</span> <span class="n">NewLawyerLetter</span><span class="p">(</span><span class="s">"hi!"</span><span class="p">);</span>
+
+	<span class="c">// post 객체 생성</span>
+	<span class="n">lovePost</span> <span class="o">:=</span> <span class="n">NewPost</span><span class="p">(</span><span class="n">loveLetter</span><span class="p">)</span>
+	<span class="n">lovePost</span><span class="o">.</span><span class="n">PrintPost</span><span class="p">()</span>
+
+	<span class="c">// post 객체 생성</span>
+	<span class="n">lawyerPost</span> <span class="o">:=</span> <span class="n">NewPost</span><span class="p">(</span><span class="n">lawyerLetter</span><span class="p">)</span>
+	<span class="n">lawyerPost</span><span class="o">.</span><span class="n">PrintPost</span><span class="p">()</span>
+
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>이제 DI의 장점이 뚜렷해 진다.  우리는 loveLetter 객체를 넣어서 lovePost객체를 생성 하였고, lawyerLetter 객체를 넣어서 lawyerPost객체를 생성하였다.</p>
+
+<p>여기서 주목할 점은,  Post가 Letter에 의존하는 상황에서  Post 클래스를 수정하지도 않으면서, 자유롭게 2개의 서로 다른 클래스를 주입 했다는 사실이다!</p>
+
+<p>참고로, Post는 자신이 의존하고 있는 Letter객체를 생성하는 책임을 외부(main함수)로 넘겼는데, 이를 제어의 역전(Inversion of Control, IoC)라고 부른다. 실제로 여러 웹 프레임워크에서 이 개념을 채용하는 것을 쉽게 찾아 볼 수 있다.</p>
+
+<p>아무튼 우리는 DI를 통해서 강하게 결합 되었던 두 클래스를 분리 하였고, 유연성을 확보하였다. 이를 통해서 다음과 같은 이점을 얻었다.</p>
+
+<ul>
+  <li>두 객체 사이의 관심사 분리</li>
+  <li>결합도 낮춤</li>
+  <li>유닛 테스트 용이</li>
+  <li>재 사용성 향상</li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://velog.io/@wlsdud2194/what-is-di">https://velog.io/@wlsdud2194/what-is-di</a></li>
+  <li><a href="https://blog.advenoh.pe.kr/go/Go%EC%97%90%EC%84%9C%EC%9D%98-%EB%8B%A4%ED%98%95%EC%84%B1-Polymorphism/">https://blog.advenoh.pe.kr/go/Go에서의-다형성-Polymorphism/</a></li>
+  <li><a href="https://mangkyu.tistory.com/125">https://mangkyu.tistory.com/125</a></li>
+  <li><a href="https://mangkyu.tistory.com/150">https://mangkyu.tistory.com/150</a></li>
+</ul>
+
+	</div>
+	<br/>
+	<br/>
+	<script src="https://utteranc.es/client.js"
+        repo="deagwon97/deagwon97.github.io"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+	</script>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

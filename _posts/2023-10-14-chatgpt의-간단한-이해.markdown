@@ -1,0 +1,58 @@
+---
+layout: post
+thumbnail: ""
+title: "chatgpt의 간단한 이해"
+createdAt: 2023-10-14 13:58:20.634000
+updatedAt: 2023-10-14 13:58:20.634000
+category: "기타"
+---
+## chatgpt란?
+
+- Transformer 계열의 대형 언어 모델(large language model, LLM) 챗봇이다.
+- 인간 피드백형 강화학습 (Reinforcement Learning w/ Human Feedback, RLHF)을 통해 학습한다.
+- chatgpt는 인간의 언어, 이미지, 영상 등을 입력으로 받는다. LLM을 통해서 이러한 정보들을 고차원 벡터공간에 매핑한다. 이렇게 수치화된 정보는 강화학습 모델의 '상태'가 된다. '정책'을 바탕으로 최적의 '행동'을 수행하는 방식으로 동작한다.
+- https://seo.tbwakorea.com/blog/what-is-chatgpt/
+
+## **강화학습(reinforcement-learning)**
+
+- ***강화학습***은 컴퓨터 에이전트가 역동적인 환경에서 반복적인 시행착오 상호작용을 통해 작업 수행 방법을 학습하는 머신러닝 기법의 한 유형입니다.
+- 용어
+    - 외부 환경: 행동의 주체에서 입력 받는 모든 정보
+    - 상태: 행동의 주체가 가지고 있는 과거 정보 + 외부 환경
+    - 정책: 현재 상태에서 가장 최적의 선택을 하는 원칙
+    - 행동: 상태와 정책을 통해서 외부 환경 및 나의 상태에 변화를 가하는 것
+    - episode: 일련의 행동 집합
+    - reward: 학습을 위해서 주어지는 행동에 대한 긍적적 혹은 부정적 피드백
+    - return: episode가 끝나고 주어지는 피드백
+- ***강화학습은*** 정책과 상태에 따라서 연속적인 행동을 할 때, 그에 따른 보상이 주어지는 것을 보고 정책을 더 나은 방향으로 개선하는 학습방법이다.
+- https://brunch.co.kr/@hansungdev/21
+
+## **transformer란?**
+
+- 자연어(글자, 말, 사람이 사용하는 문장)에서 의미(의미 벡터)를 추출하는 인공지능 모델
+- ****트랜스포머 모델은 문장 속 단어와 같은 순차 데이터 내의 관계를 추적해 맥락과 의미를 학습하는 신경망이다.****
+- 용어
+    - 고차원 벡터 공간: 정보를 수학적으로 표현한 것
+        - 유사한 정보는 벡터 공간에서 가깝게 위치하며, 유사하지 않은 정보는 벡터 공간에서 멀리 위치한다.
+    - 임베딩: 단어나 문장을 고차원 벡터 공간에 매핑하는 것
+    - 어테션 알고리즘: 문장을 임베딩 할 때, 단어의 위치, 순서, 빈도 등을 고려하여 문장의 정보를 수치화하는 알고리즘
+- https://blogs.nvidia.co.kr/2022/04/01/what-is-a-transformer-model/
+
+## Reference
+- **transformer를 처음 소개한 논문**
+    - https://arxiv.org/abs/1706.03762
+- **강화학습에 대한 현대적인 개념을 적립한 책**
+   - http://incompleteideas.net/book/the-book-2nd.html
+- **강화학습에서 한 동안 주로 사용되던 td-learning을 소개한 논문**
+   - https://www.csd.uwo.ca/~xling/cs346a/extra/tdgammon.pdf
+- **GPT를 소개한 논문**
+   - https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf
+- **reinforcement-learning concepts**
+    - https://towardsdatascience.com/reinforcement-learning-an-introduction-to-the-concepts-applications-and-code-ced6fbfd882d
+- **How ChatGPT actually works**
+    - https://www.assemblyai.com/blog/how-chatgpt-actually-works/
+- ****ChatGPT broke the Turing test — the race is on for new ways to assess AI****
+    - https://www.nature.com/articles/d41586-023-02361-7
+- **GPT-4 Technical Report**
+    - https://arxiv.org/pdf/2303.08774.pdf
+

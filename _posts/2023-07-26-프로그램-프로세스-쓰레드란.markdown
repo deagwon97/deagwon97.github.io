@@ -1,0 +1,68 @@
+---
+layout: post
+thumbnail: 720006c7-c756-4c60-8893-06d6a02225ff
+title: "프로그램, 프로세스, 쓰레드란?"
+createdAt: 2023-07-26 10:49:07.718000
+updatedAt: 2023-07-26 10:49:07.718000
+category: "운영체제/컴퓨터구조"
+---
+ 
+ 리눅스의 ``ps -ef``이라는 명령어는 현재 실행중인 프로세스의 목록과 상태를 보여준다. 이 명령어를 통해서 지금 컴퓨터가 CPU자원을 어디에 쓰고 있는지 확인할 수 있다. 그렇다면 이 프로세스라는 것은 무엇일까? 프로그램, 쓰레드, 운영체제, 커널 등의 개념에 대해서 알아보자.
+
+## I. 프로그램이란?
+ 먼저 프로그램에 대해서 정의하자.
+ > _Computer Program은 소스코드의 인간이 이해할 수 있는 형태이다.
+ wikipedia_
+ 
+ > _Program은 특정 함수를 수행하기위해 컴퓨터가 사용하는 명령들의 집합이다.
+ webopedia_
+ 
+ 여러 글들을 읽어보면 결국 프로그램이란 **"컴퓨터가 특정 동작을 수행하기위해 인간이 작성한 코드의 집합"**을 의미한다는 것을 알 수 있다.
+ 
+## II. 프로세스란?
+ > _Process란 하나 혹은 그 이상의 Thread로 실행되는 컴퓨터 프로그램의 instance이다. Process는 Program code와 그 activity를 포함한다.
+ wikipedia_
+ 
+ 부연하자면 프로세스는 프로그램을 실행하기 위해 필요한 가장 작은 단위의 쓰레드, 메모리, 소스코드들의 집합이다.
+ 
+ - 컨텍스트(Context)란?
+ In computer science, a task context is the minimal set of data used by a task (which may be a process, thread, or fiber) that must be saved to allow a task to be interrupted, and later continued from the same point.
+ task context란 하나의 작업(프로세스 혹은 쓰레드)에 사용되는 최소한의 데이터 조합니다. 이러한 context는 중간에 정지했을 경우 그 지점
+ 
+## III. 쓰레드(Tread)란?
+  
+> _쓰레드란 스케줄러(OS의 일부)가 독립적으로 관리할 수 있는 가장 작은 단위의 프로그램 instruction sequence이다.
+  wikipedia_
+ 
+ **쓰레드는 다른 코드와 독립되어 실행할 수 있는 instruction 집합의 최소 단위**이다. (A thread is a sequence of such instructions within a program that can be executed independently of other code.)
+ 
+- 프로세스 vs 쓰레드
+  - 프로세스
+    - 어떤 프로그램을 수행하기 위한 "코드, 메모리, 쓰레드"의 최소 단위.
+    - 서로다른 쓰레드는 메모리를 공유할 수 없다.
+  - 쓰레드
+    - 운영체제의 스케쥴러가 작업을 관리할 때, 사용되는 명령 집합의 최소 단위.
+    - 하나의 프로세스에 속한 서로다른 쓰레드는 메모리를 공유할 수 있다.
+
+<img alt="image" src="/images/720006c7-c756-4c60-8893-06d6a02225ff"/>
+from wikipedia
+
+ - 하이퍼 쓰레딩
+ 과거의 CPU는 한번에 하나의 Thread를 실행할 수 있었지만 하나의 CPU코어가 여러개의 Thread를 동시에 실행하는 하이퍼 쓰레딩이라는 기술이 등장하였다. 이 기술을 통해서 물리적으로 하나의 CPU 코어는 여러개의 쓰레드를 동시에 실행시킬 수 있다.
+
+<img alt="image" src="/images/31c260cf-69be-4626-b335-ccd14fe63cdc"/>
+ from www.intel.com
+ 
+ 지금까지 나온 사실을 정리하면 다음과 같다.
+ 
+ 1. 프로그램은 **동작을 수행하는 명령 코드**의 집합이다.
+ 2. 이 프로그램은 최소 하나 이상의 프로세스로 동작한다.
+ 3. 프로세스는 프로그램을 실행하기 위해 필요한 최소단위의 **코드, 메모리, 쓰레드**들의 집합이다.
+ 4. 쓰레드는 **CPU가** 어떤 동작을 수행하기 위해 사용되는 명령 집합의 최소 단위이다.
+ 5. 코어는 쓰레드를 통해서 동작을 수행한다.
+ 
+## Reference
+ - https://www.intel.com/content/www/us/en/gaming/resources/hyper-threading.html
+ - https://stackoverflow.com/questions/5201852/what-is-a-thread-really
+ - https://en.wikipedia.org/wiki/Thread_(computing)
+ - https://en.wikipedia.org/wiki/Computer_program

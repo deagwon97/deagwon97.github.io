@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="bdg-blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>bdg-blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/">bdg-blog</a>
+	</div>
+	<p class="lead"></p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#쿠버네티스">
+				<span class="name">쿠버네티스</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#기타">
+				<span class="name">기타</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#운영체제/컴퓨터구조">
+				<span class="name">운영체제/컴퓨터구조</span>
+				<span class="badge">7</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#백앤드">
+				<span class="name">백앤드</span>
+				<span class="badge">5</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#컨테이너">
+				<span class="name">컨테이너</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Go">
+				<span class="name">Go</span>
+				<span class="badge">6</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 아키텍쳐">
+				<span class="name">클린 아키텍쳐</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#보안">
+				<span class="name">보안</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#리눅스">
+				<span class="name">리눅스</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#네트워크">
+				<span class="name">네트워크</span>
+				<span class="badge">4</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#자바스크립트">
+				<span class="name">자바스크립트</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 코드">
+				<span class="name">클린 코드</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			Race Condition
+		</div>
+		<time class="post-date dt-published" datetime="2023-07-26T19:38:06+09:00" itemprop="datePublished">2023/07/26
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>Mutli Task를 수행하다보면 동일한 자원에 서로다른 task가 접근하는 상황이 생길 수 있다. 이때 Race Condition 혹은 Dead Lock과 같은 문제가 발생하기도 한다.
+ 잘알려진 자료구조인 Linked List를 통해서 Race Condition과 Dead Lock에 대해 알아보자.</p>
+
+<p>## Race Condition</p>
+<blockquote>
+  <p><em>Race Condition(경쟁 상태)이란 공유 자원에 대해 여러 개의 프로세스가 동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있는 상태를 말한다.
+ wikipedia</em></p>
+</blockquote>
+
+<p>### Linked List
+ Linked List란 하나의 노드가 값과 다음 노드의 주소를 가지고 있는 자료구조이다.</p>
+
+<p><img alt="image" src="/images/455302c4-30ec-4ecd-9d79-99008711acb3" /></p>
+
+<p>Linked List의 중간에 Node B를 추가하기 위해서는</p>
+
+<ol>
+  <li>Node B를 생성하고 Head Node의 다음 노드 주소를 Node B로 변경.</li>
+  <li>Node B의 다음 노드 주소를 Node A로 변경.</li>
+</ol>
+
+<p>과 같은 작업이 필요하다.</p>
+
+<p><img alt="image" src="/images/21d576e0-2803-4941-9507-0410ff76999e" /></p>
+
+<h3 id="linked-list---multithread">Linked List - MultiThread</h3>
+
+<p><img alt="image" src="/images/dda55b3a-be2d-4c43-9f7b-bff6a02cf9ef" /></p>
+
+<p>이렇게 Linked List 중간에 노드를 추가하는 작업을 2개의 Thread를 통해서 수행한다고 가정해 보자. (Thread_1는 Node B를 Thread_2는 Node C를 추가) 이때 Thread_1과 Thead_2는 동일한 메모리자원에 번갈아 가면서 동작을 수행한다.</p>
+
+<p><strong>Thread_1</strong>의 입장에서
+ (1) List Head의 “다음 노드주소”칸에 Node B의 주소를 입력
+ (2) Node B의 주소칸에 Node A의 주소값를 입력</p>
+
+<p><strong>Thread_2</strong>의 입장에서는
+ (a) List Head의 “다음 노드 주소”칸에 Node C의 주소를 입력
+ (b) Node C의 주소칸에 Node A의 주소값을 입력</p>
+
+<p>이때, 동작(1)과 동작(a)는 둘다 <strong><em>List Head의 “다음 노드 주소칸”</em></strong> 이라는 자원을 사용한다. 여기서 동작(1), 동작(a)가 실행되는 순서에 따라 다른 결과가 나온다.</p>
+
+<p>동작(a)가 먼저 실행되서 Head의 다음 노드 주소칸에 Node C의 주소가 들어가고,</p>
+
+<p><img alt="image" src="/images/2b8da6a7-ae2d-4149-962f-9438c17c54e2" /></p>
+
+<p>동작(1)이 나중에 수행되면서  Head의 다음 노드 주소칸에 Node B가 들어가면 Node C를 가리키는 Node가 사라진다.</p>
+
+<p><img alt="image" src="/images/9f3cf486-00a9-4650-b25f-c199aba13389" /></p>
+
+<p>이처럼 공유 자원에 대해 여러 개의 프로세스가 동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있는 상태를 <strong>Race Condition</strong>이라고 부른다.</p>
+
+<h3 id="atomic-operations">Atomic Operations</h3>
+
+<p>만약 동작(1-2)와 동작(a-b)를 각각 묶어서 둘 사이에 다른 동작을 수행하지 못하도록 했다면 어떻게 됐을까?</p>
+
+<p><img alt="image" src="/images/b48f0ae3-0d8a-438c-83ea-8459053d7af9" /></p>
+
+<p>Node B가 완전히 추가되고 Node C를 추가하면 위와 같이 모든 모드들이 정상적으로 추가될 수 있다.
+이처럼 특정 작업이 수행되는 동안 다른 작업이 수행되지 못하도록 막을 경우 Race Condition을 해결할 수 있다. 이러한 작업을 Atomic Operation이라고 부른다.</p>
+
+<p>다음 포스트에서 Race Condition을 방지할 수 있는 방법에 대해서 다루겠다.</p>
+
+<h3 id="reference">Reference</h3>
+<ul>
+  <li>System Programing 수업의 강의자료를 발췌하여 정리하였다.</li>
+  <li>Seong Jong Choi chois@uos.ac.kr Multimedia Lab. Dept. of Electrical and Computer Eng. University of Seoul Seoul, Korea</li>
+</ul>
+
+	</div>
+	<br/>
+	<br/>
+	<script src="https://utteranc.es/client.js"
+        repo="deagwon97/deagwon97.github.io"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+	</script>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

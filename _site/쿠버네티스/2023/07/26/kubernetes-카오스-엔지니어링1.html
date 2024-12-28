@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="bdg-blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>bdg-blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/">bdg-blog</a>
+	</div>
+	<p class="lead"></p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#쿠버네티스">
+				<span class="name">쿠버네티스</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#기타">
+				<span class="name">기타</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#운영체제/컴퓨터구조">
+				<span class="name">운영체제/컴퓨터구조</span>
+				<span class="badge">7</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#백앤드">
+				<span class="name">백앤드</span>
+				<span class="badge">5</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#컨테이너">
+				<span class="name">컨테이너</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Go">
+				<span class="name">Go</span>
+				<span class="badge">6</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 아키텍쳐">
+				<span class="name">클린 아키텍쳐</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#보안">
+				<span class="name">보안</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#리눅스">
+				<span class="name">리눅스</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#네트워크">
+				<span class="name">네트워크</span>
+				<span class="badge">4</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#자바스크립트">
+				<span class="name">자바스크립트</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 코드">
+				<span class="name">클린 코드</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			[kubernetes] 카오스 엔지니어링-1
+		</div>
+		<time class="post-date dt-published" datetime="2023-07-26T20:15:45+09:00" itemprop="datePublished">2023/07/26
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p><img alt="image" src="/images/4f88347d-7cf5-4e1b-b180-d66e3c6dcba8" /></p>
+<ul>
+  <li>Netflix에서 사용하는 Chaos Monkey의 로고</li>
+</ul>
+
+<p>techtarget에서 Ben Lutkevich가 소개하는 카오스 엔지니어링에 대해 정리하였다. 이번 포스트에서는 쿠버네티스 클러스터에 카오스 엔지니어링을 적용하는 방법은 다루지 않는다. 카오스 엔지니어링이 무엇인지 알아보고, 다음 포스트에서 쿠버네티스에 적용하는 방법을 다루겠다.</p>
+
+<h2 id="1-카오스-엔지니어링-이란">1. 카오스 엔지니어링 이란?</h2>
+<p>테스트 환경 혹은 개발 환경은 실제 배포 환경과는 여러 가지 차이점이 있다. 이로인해 배포 환경이 아닌 다른 환경에서 테스트를 할 경우, 실제로 발생할 수 있는 모든 문제를 적절히 테스트 할 수 없다.</p>
+
+<p>몇몇 기업들은 운영 상황에서 발생할 수 있는 문제를 효과적으로 파악하기 위해서 <strong>운영 테스트</strong>를 도입하였는데, 운영 테스트의 대표적인 방법으로 카오스 엔지니어링이 있다.</p>
+
+<blockquote>
+  <p>카오스 엔지니어링(Chaos Engineering)이란 분산 컴퓨터 시스템이 예상치 못한 스트레스를 견딜 수 있는지 테스트하는 과정을 말한다.</p>
+</blockquote>
+
+<p>무작위로 예상치 못한 작업을 반복적으로 요청하면서, 시스템이 가지고 있는 약점을 파악하는 것이 목적이다.</p>
+
+<p>하나의 네트워크 혹은 공유된 자원으로 묶여있는 시스템을 <strong>분산 시스템</strong>이라고 부르는데, 복잡한 <strong>분산 시스템</strong>에서는 예상하지 못하는 에러가 종종 발생하며, 이러한 에러가 발생했을 때, 대처하기 매우 까다롭다.</p>
+
+<p>카오스 엔지니어링은 이런 복잡한 분산 시스템에서 에러가 발생하는 부분을 찾는데 매우 유용하다.</p>
+
+<p>예를 들면</p>
+
+<ul>
+  <li>
+    <p>Blind Spots</p>
+
+    <p>모니터링 도구들이 확인하지 못하는 영역에서 발생하는 에러</p>
+  </li>
+  <li>
+    <p>Hidden Bugs</p>
+
+    <p>소프트웨어의 오작동을 유발하는 결함 혹은 이슈</p>
+  </li>
+  <li>
+    <p>Performance Bottlenecks</p>
+
+    <p>성능과 효율을 끌어올릴 수 있는 특정 지점</p>
+  </li>
+</ul>
+
+<p>과 같은 지점을 발견하고 사전에 조치하도록 도와준다.</p>
+
+<h2 id="2-카오스-엔지니어링과-스트레스-테스팅의-차이점">2. 카오스 엔지니어링과 스트레스 테스팅의 차이점</h2>
+
+<p><strong>카오스 엔지니어링</strong>은 시스템이나 네트워크의 이슈를 발견하고 고친다는 점에서 <strong>스트레스 테스팅</strong>과 유사하다.</p>
+
+<p>카오스 엔지니어링과 스트레스 테스팅의 차이점을 알아보면 카오스 엔지니어링에 대해 조금 더 명확히 이해할 수 있다.</p>
+
+<p>우선 <strong>스트레스 테스팅은 한 번에 하나의 컴포넌트를 테스트하고 수정하며, 의도한 방향으로 시스템이 잘 동작하는지를 확인한다.</strong></p>
+
+<p>반면, <strong>카오스 엔지니어링</strong>은 일어날 가능성이 희박하거나, 불분명한 이슈를 찾는다. 즉, <strong>시스템에 대해 지금까지 알지 못했던 새로운 지식을 얻은 것이 목적이다.</strong></p>
+
+<h2 id="3-카오스-엔지니어링-단계">3. 카오스 엔지니어링 단계</h2>
+
+<ol>
+  <li>
+    <p><strong>베이스라인 설정</strong></p>
+
+    <p>이상적인 시스템의 상태를 정의하는 단계이다. 일반적인 동작 상태를 정의하고 여기서 벗어나는 상황을 파악해야 한다.</p>
+  </li>
+  <li>
+    <p><strong>가설 설정</strong></p>
+
+    <p>여러 가지 가능성 있는 약점들을 생각해 보고, 이를 통해서 가설을 설정하는 단계이다. 가장 대표적으로, 매우 큰 트래픽 스파이크가 발생할 때, 서버에 어떤 문제가 생길지 생각해 보고, 가설을 새워볼 수 있다.</p>
+  </li>
+  <li>
+    <p><strong>테스트</strong></p>
+
+    <p>가설에서 만들 상황을 실제로 테스트하는 단계이다. 테스트 단계에서 발생하는 문제를 파악하면, 시스템이 가지고 있는 약점을 파악할 수 있다.</p>
+  </li>
+  <li>
+    <p><strong>평가</strong></p>
+
+    <p>가설과 실제 테스트 결과를 비교하고, 개선사항을 찾는 단계이다.</p>
+  </li>
+</ol>
+
+<h2 id="4-분산시스템에서-발생할-수-있는-8가지-오류">4. 분산시스템에서 발생할 수 있는 8가지 오류</h2>
+
+<p>L. Peter Deutsch와 그의 연구진은 분산 시스템이 가지는 8가지 오류들을 발표하였다. 많은 개발자들이 은연중에 다음의 오류를 그대로 믿어버린다. 이 8가지 사실이 오류라는 것을 상기하고 시스템을 설계하는 것이 중요하다.</p>
+
+<ul>
+  <li>
+    <p>네트워크는 항상 신뢰할 수 있다.</p>
+
+    <p>네트워크는 모든 전송을 보장해 주지 않는다. 종종 네트워크 연결은 끊어질 수 있다.</p>
+  </li>
+  <li>latency는 0이다.</li>
+  <li>Bandwidth는 무한하다.</li>
+  <li>네트워크의 보안은 언제나 철저하다.</li>
+  <li>
+    <p>네트워크의 위상은 항상 변하지 않는다.</p>
+
+    <p>상황에 따라 네트워크의 위상이 바뀔 수 있다.</p>
+  </li>
+  <li>관리자는 하나뿐이다.</li>
+  <li>전송 비용(Transport Cost)은 0이다.</li>
+  <li>
+    <p>네트워크는 Homogeneous(동종) 이다.</p>
+
+    <p>네트워크는 이종으로 구성될 수 있다.</p>
+  </li>
+</ul>
+
+<p>이 8가지 오류는 카오스 엔지니어링을 설계할 때도 좋은 출발점이다.</p>
+
+<h2 id="5-카오스-엔지니어링-체크-리스트">5. 카오스 엔지니어링 체크 리스트</h2>
+
+<p>복잡한 카오스 엔지니어링을 수행할 때, 다음의 체크 리스트를 따르면, 위에서 언급했던 8가지 오류를 피하는 데 도움이 된다.</p>
+
+<ul>
+  <li>시스템의 일반적인 동작들을 완전히 이해한다.</li>
+  <li>현실적인 시나리오를 시뮬레이션 한다.</li>
+  <li>real-world의 상황들을 테스트한다.</li>
+  <li>폭발 반경(생길 수 있는 문제의 범위)를 최소화한다.</li>
+</ul>
+
+<h2 id="6-카오스-엔지니어링-도구">6. 카오스 엔지니어링 도구</h2>
+
+<p>카오스 엔지니어링을 개발하고 도입한 넷플릭스는 자신들이 개발한 플랫폼을 오픈소스로 공개 하였고, 다양한 회사 및 단체에서 카오스 엔지니어링을 도와주는 도구를 제공한다.</p>
+
+<ul>
+  <li><a href="https://www.techtarget.com/whatis/definition/Simian-Army"><strong>Simian Armu</strong></a></li>
+  <li><strong>AWS Fault Injection Simulator</strong></li>
+  <li><strong>Simoorg</strong></li>
+  <li><strong>Monkey-Ops</strong></li>
+  <li><strong>Gremlin</strong></li>
+  <li><strong>PowerfulSeal</strong></li>
+  <li><strong>KubeMonky</strong></li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://www.techtarget.com/searchitoperations/definition/chaos-engineering#:~:text=Chaos%20engineering%20experiments%20intentionally%20generate,software%20cannot%20gather%20adequate%20data">https://www.techtarget.com/searchitoperations/definition/chaos-engineering#:~:text=Chaos engineering experiments intentionally generate,software cannot gather adequate data</a>.</li>
+</ul>
+
+	</div>
+	<br/>
+	<br/>
+	<script src="https://utteranc.es/client.js"
+        repo="deagwon97/deagwon97.github.io"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+	</script>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

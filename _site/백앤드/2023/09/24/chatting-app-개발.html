@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="bdg-blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>bdg-blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/">bdg-blog</a>
+	</div>
+	<p class="lead"></p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#쿠버네티스">
+				<span class="name">쿠버네티스</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#기타">
+				<span class="name">기타</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#운영체제/컴퓨터구조">
+				<span class="name">운영체제/컴퓨터구조</span>
+				<span class="badge">7</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#백앤드">
+				<span class="name">백앤드</span>
+				<span class="badge">5</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#컨테이너">
+				<span class="name">컨테이너</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Go">
+				<span class="name">Go</span>
+				<span class="badge">6</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 아키텍쳐">
+				<span class="name">클린 아키텍쳐</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#보안">
+				<span class="name">보안</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#리눅스">
+				<span class="name">리눅스</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#네트워크">
+				<span class="name">네트워크</span>
+				<span class="badge">4</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#자바스크립트">
+				<span class="name">자바스크립트</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 코드">
+				<span class="name">클린 코드</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			chatting app 개발
+		</div>
+		<time class="post-date dt-published" datetime="2023-09-24T22:09:59+09:00" itemprop="datePublished">2023/09/24
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>토이 프로젝트로 익명 채팅방을 만들었습니다. websocket을 통해서 사용자가 서버에 메시지을 보내면 서버는 다른 사용자에게 메시지를 전달하는 간단한 프로젝트 입니다. 채팅 앱은 bdg.blog 소스코드에 포함되어 있습니다.</p>
+
+<ul>
+  <li>앱 링크: <a href="https://deagwon.com/chat">bdg.chat</a></li>
+  <li>github: https://github.com/deagwon97/bdg-blog-v2/</li>
+</ul>
+
+<p><img alt="image" src="/images/f370aa56-4261-4cbc-b0ac-c390168b9cd5" /></p>
+
+<h3 id="기능-명세">기능 명세</h3>
+
+<p>우선 구체적인 기능을 글로 정리했습니다.</p>
+
+<ul>
+  <li>사용자는 채팅방에 입장하는 순간 랜덤하게 이름을 부여받는다.</li>
+  <li>사용자가 채팅방에 입장하면 기존에 채팅방에 입장한 사람들은 “XX가 입장했습니다.”라는 메세지를 받는다.</li>
+  <li>사용자가 텍스트를 입력하고 엔터키 혹은 전송 버튼을 누르면 메시지가 서버로 전달된다.</li>
+  <li>서버는 사용자가 전송한 메시지와 사용자의 이름을 다른 사용자들에게 전송한다.</li>
+  <li>사용자가 브라우저는 닫거나 다른 페이지로 이동하면 기존에 채팅방에 입장한 사람들은 “XX가 나갔습니다.”라는 메시지를 받는다.</li>
+</ul>
+
+<h3 id="고려사항">고려사항</h3>
+
+<p>bdg blog는 2개의 replicaSet을 가지는 deployment으로 배포됩니다. 서로 다른 pod가 채팅방의 메시지를 공유하기 위해서는 메시지 브로커가 필요합니다.</p>
+
+<p><img alt="image" src="/images/5dafabf7-2818-4604-861c-d3c754fb825f" /></p>
+
+<h2 id="구현">구현</h2>
+
+<h3 id="서버">서버</h3>
+
+<p>서버가 실행되는 시점에 메시지 브로커 redis와 연결되는 publisher객체와 subscriber객체를 싱글톤으로 생성합니다. 이후 서버는 클라이언트의 web socket connection 생성하는 요청을 기다립니다.</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// server/chat/redisSingleton.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Redis</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ioredis</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">globalRedis</span> <span class="o">=</span> <span class="nx">globalThis</span> <span class="k">as</span> <span class="nx">unknown</span> <span class="k">as</span> <span class="p">{</span>
+  <span class="na">redisPub</span><span class="p">:</span> <span class="nx">Redis</span> <span class="o">|</span> <span class="kc">undefined</span>
+  <span class="na">redisSub</span><span class="p">:</span> <span class="nx">Redis</span> <span class="o">|</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">redisPub</span> <span class="o">=</span>
+  <span class="nx">globalRedis</span><span class="p">.</span><span class="nx">redisPub</span> <span class="o">??</span>
+  <span class="k">new</span> <span class="nx">Redis</span><span class="p">({</span>
+    <span class="na">host</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NEXT_PUBLIC_REDIS_HOST</span>
+  <span class="p">})</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getRedisSub</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">globalRedis</span><span class="p">.</span><span class="nx">redisSub</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">globalRedis</span><span class="p">.</span><span class="nx">redisSub</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">globalRedis</span><span class="p">.</span><span class="nx">redisSub</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Redis</span><span class="p">({</span>
+      <span class="na">host</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NEXT_PUBLIC_REDIS_HOST</span>
+    <span class="p">})</span>
+    <span class="k">await</span> <span class="nx">globalRedis</span><span class="p">.</span><span class="nx">redisSub</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="dl">'</span><span class="s1">bdg-chat-user-data</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">``</span><span class="na">error</span><span class="p">:</span> <span class="nx">Subscribed</span> <span class="nx">to</span> <span class="nx">NULL</span> <span class="nx">channels</span><span class="p">.</span> <span class="nx">NULL</span><span class="s2">``</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="nx">globalRedis</span><span class="p">.</span><span class="nx">redisSub</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// server/chat/chatSocketHandler.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NextApiRequest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Server</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">socket.io</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NextApiResponseWithSocket</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">socket.d</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">redisPub</span><span class="p">,</span> <span class="nx">getRedisSub</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">server/chat/redisSingleton</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Redis</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ioredis</span><span class="dl">'</span>
+
+<span class="kd">let</span> <span class="nx">io</span><span class="p">:</span> <span class="nx">Server</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="kd">let</span> <span class="nx">redisSub</span><span class="p">:</span> <span class="nx">Redis</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
+
+<span class="kd">const</span> <span class="nx">ChatSocketHandler</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span>
+  <span class="nx">_</span><span class="p">:</span> <span class="nx">NextApiRequest</span><span class="p">,</span>
+  <span class="nx">res</span><span class="p">:</span> <span class="nx">NextApiResponseWithSocket</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">io</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">io</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">io</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Server</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">server</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">io</span> <span class="o">=</span> <span class="nx">io</span>
+    <span class="kd">let</span> <span class="nx">userName</span> <span class="o">=</span> <span class="dl">''</span>
+
+    <span class="c1">// create websocket connection</span>
+    <span class="c1">// when new client connects</span>
+    <span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">connection</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// create redis sub</span>
+      <span class="nx">redisSub</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getRedisSub</span><span class="p">()</span>
+
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">client-server-chat</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">userName</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">?.</span><span class="nx">userName</span> <span class="k">as</span> <span class="kr">string</span>
+        <span class="nx">redisPub</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span>
+          <span class="dl">'</span><span class="s1">bdg-chat-user-data</span><span class="dl">'</span><span class="p">,</span>
+          <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+            <span class="p">...{</span>
+              <span class="na">message</span><span class="p">:</span> <span class="nx">msg</span>
+            <span class="p">}</span>
+          <span class="p">})</span>
+        <span class="p">)</span>
+      <span class="p">})</span>
+
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">disconnect</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">redisPub</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span>
+          <span class="dl">'</span><span class="s1">bdg-chat-user-data</span><span class="dl">'</span><span class="p">,</span>
+          <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+            <span class="p">...{</span>
+              <span class="na">message</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">notice</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">userName</span><span class="p">:</span> <span class="nx">userName</span><span class="p">,</span>
+                <span class="na">message</span><span class="p">:</span> <span class="s2">``</span><span class="nx">NULL님이</span> <span class="nx">나갔습니다</span><span class="p">.</span><span class="s2">``</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+        <span class="k">return</span>
+      <span class="p">})</span>
+
+      <span class="nx">redisSub</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">redisMessage</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+        <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">server-client-chat</span><span class="dl">'</span><span class="p">,</span> <span class="nx">redisMessage</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+      <span class="p">})</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ChatSocketHandler</span>
+</code></pre></div></div>
+
+<h3 id="클라이언트">클라이언트</h3>
+
+<p>사용자가 채팅방에 입장하는 순간 이름을 서버로부터 이름을 부여받습니다. 이후 webSocket을 연결하고, 부여받은 이름을 통해서 입장 메시지를 서버에 전달합니다.</p>
+
+<p>다음부터는 <code class="highlighter-rouge">socket.emit</code> 함수와 <code class="highlighter-rouge">socket.on</code> 함수를 사용해 서버로부터 메시지를 주고받도록 구현했습니다.</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">initSocketCallback</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">userName</span> <span class="o">===</span> <span class="dl">''</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+  <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/socket</span><span class="dl">'</span><span class="p">)</span>
+  <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">(</span><span class="dl">''</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/socket.io</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">transports</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">websocket</span><span class="dl">'</span><span class="p">],</span>
+    <span class="na">secure</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">production</span><span class="dl">'</span>
+  <span class="p">})</span> <span class="k">as</span> <span class="nx">Socket</span>
+
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">client-server-chat</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">notice</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">userName</span><span class="p">:</span> <span class="nx">userName</span><span class="p">,</span>
+    <span class="na">message</span><span class="p">:</span> <span class="s2">``</span><span class="nx">NULL님이</span> <span class="nx">입장했습니다</span><span class="p">.</span><span class="s2">``</span>
+  <span class="p">}</span> <span class="k">as</span> <span class="nx">ChatMessage</span><span class="p">)</span>
+
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">server-client-chat</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setChatMessageList</span><span class="p">((</span><span class="nx">chatMessageList</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[...</span><span class="nx">chatMessageList</span><span class="p">,</span> <span class="nx">msg</span><span class="p">])</span>
+  <span class="p">})</span>
+	<span class="p">},</span> <span class="p">[</span><span class="nx">userName</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">initSocketCallback</span><span class="p">()</span>
+<span class="p">},</span> <span class="p">[</span><span class="nx">initSocketCallback</span><span class="p">])</span>
+
+<span class="kd">const</span> <span class="nx">sendChat</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">input</span> <span class="o">===</span> <span class="dl">''</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">socket</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">initSocketCallback</span><span class="p">()</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">client-server-chat</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">chat</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">userName</span><span class="p">:</span> <span class="nx">userName</span><span class="p">,</span>
+    <span class="na">message</span><span class="p">:</span> <span class="nx">input</span>
+  <span class="p">}</span> <span class="k">as</span> <span class="nx">ChatMessage</span><span class="p">)</span>
+  <span class="nx">setInput</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="reference">Reference</h3>
+
+<ul>
+  <li>https://github.com/redis/ioredis</li>
+  <li>https://github.com/socketio/socket.io-client</li>
+</ul>
+
+
+	</div>
+	<br/>
+	<br/>
+	<script src="https://utteranc.es/client.js"
+        repo="deagwon97/deagwon97.github.io"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+	</script>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

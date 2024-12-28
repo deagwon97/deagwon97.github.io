@@ -64,35 +64,73 @@ a:hover {
 }
 
 pre {
-	display: block;
-	overflow: auto;
 	margin-bottom: 15px;
 	padding-bottom: 10px;
-	padding: 5px;
+	padding: 20px;
 	line-height: 1.2;
+	width: fit-content;
+    /* overflow-x: scroll;
+    ::-webkit-scrollbar {
+      display: none;
+    } */
 }
 
 code {
 	font-family: "Menlo", "Consolas", monospace;
 	font-size: 0.8em;
 	margin: 0px;
+	
 }
 
 .container {
 	min-height: 100%;
 	display: flex;
 	justify-content: space-between;
-	flex-flow: row nowrap;
+	/* flex-flow: row nowrap; */
+}
+
+.highlight {
+	/* width: 50%; */
+	margin: 10px 0;
+	overflow-x: scroll;
+	border-radius: 0.5rem;
 }
 
 .content {
-	/*margin-left: 180px;*/
+	margin: 0px auto;
+	max-width: 1024px;
 	flex: 1 1 auto;
 	padding: 0px 30px;
+	img {
+		display: flex;
+		max-width: 80%;
+		margin: 10px auto;
+		object-fit: cover;
+		align-self: center;
+	}
+	table {
+		border-collapse: collapse; 
+		margin: 20px auto; 
+		font-size: 16px;
+		text-align: left;
+	  }
+	  
+	th, td {
+		border: 1px solid #dddddd; 
+		padding: 12px; 
+	  }
+	  
+	th {
+		background-color: #f4f4f4; 
+		font-weight: bold; 
+	  }
+	  
+	tr:nth-child(even) {
+		background-color: #f9f9f9; 
+	  }
 }
 
 .sidebar {
-	/*position: fixed;*/
 	display: flex;
 	flex-flow: column nowrap;
 	flex: 0 0 220px;

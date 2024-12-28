@@ -1,0 +1,54 @@
+---
+layout: post
+thumbnail: ""
+title: "[Go] 제네릭"
+createdAt: 2023-07-26 11:09:11.867000
+updatedAt: 2023-07-26 11:09:11.867000
+category: "Go"
+---
+## 제네릭이란
+
+ 클래스나 메소드에서 사용할 내부 타입을 컴파일 순간에 지정하는 방법으로, 타입을 일반화하는 것을 의미한다.
+
+``````go
+func addInt(a int, b int) int {
+	return a * b
+}
+
+func addInt64(a int64, b int64) int64 {
+	return a * b
+}
+
+func addFloat64(a float64, b float64) float64 {
+	return a * b
+}
+``````
+
+위와 같이 동일한 동작을 하지만, 타입이 다른 여러개의 함수를 생성할 때, 
+
+Number 라는 타입을 지정하여 제네릭 함수를 만들 수 있다.
+
+``````go
+type Number interface {
+	int | int64 | float64
+}
+
+func addGeneric[T Number](a, b T) T {
+	return a * b
+}
+``````
+
+이 Number라는 타입은 int, int64, float64중 하나의 타입을 가지며, 컴파일 순간 3가지 타입에 대해 서로다른 3개의 함수를 정의하고, 함수에 들어오는 입력에 따라 타입을 결정한다.
+
+## 단점
+
+제네릭으로 생성한 함수나 타입은 하나의 함수나 타입처럼 보이지만, 실제로는 컴파일 타임에 사용한 타입 파라미터별로 새로운 함수나 타입을 생성해서 사용하게 된다. 따라서 제네릭 프로그래밍을 많이 사용할 경우 컴파일 타임에 생성해야하는 함수와 타입 갯수가 늘어난다. 이로 인해 컴파일 시간이 증가하고 프로그램의 크기가 커진다. 
+
+## 언제 써야 유용한가?
+
+- **자료구조**와 같이 여러 타입에 대해 같은 동작을 하는 함수를 만들 때 유용하다.
+- 동작하는 코드를 먼저 만들고, 제네릭은 나중에 적용하자.
+
+## Reference
+
+- [https://goldenrabbit.co.kr/2022/01/28/생각하는-go-언어-프로그래밍-go-제네릭의-이해/](https://goldenrabbit.co.kr/2022/01/28/%EC%83%9D%EA%B0%81%ED%95%98%EB%8A%94-go-%EC%96%B8%EC%96%B4-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-go-%EC%A0%9C%EB%84%A4%EB%A6%AD%EC%9D%98-%EC%9D%B4%ED%95%B4/)

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="bdg-blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>bdg-blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/">bdg-blog</a>
+	</div>
+	<p class="lead"></p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#쿠버네티스">
+				<span class="name">쿠버네티스</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#기타">
+				<span class="name">기타</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#운영체제/컴퓨터구조">
+				<span class="name">운영체제/컴퓨터구조</span>
+				<span class="badge">7</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#백앤드">
+				<span class="name">백앤드</span>
+				<span class="badge">5</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#컨테이너">
+				<span class="name">컨테이너</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Go">
+				<span class="name">Go</span>
+				<span class="badge">6</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 아키텍쳐">
+				<span class="name">클린 아키텍쳐</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#보안">
+				<span class="name">보안</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#리눅스">
+				<span class="name">리눅스</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#네트워크">
+				<span class="name">네트워크</span>
+				<span class="badge">4</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#자바스크립트">
+				<span class="name">자바스크립트</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 코드">
+				<span class="name">클린 코드</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			[GORM][Mysql] Create If Not Exist
+		</div>
+		<time class="post-date dt-published" datetime="2023-07-26T20:16:36+09:00" itemprop="datePublished">2023/07/26
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>자주 마추지는 상황이다.</p>
+
+<ul>
+  <li><strong>데이터를 추가</strong>하면서</li>
+  <li><strong>PK가 중복</strong>되는 경우는
+    <ul>
+      <li><strong>추가하지 않</strong>으면서</li>
+      <li><strong>업데이트</strong> or <strong>무시할 때</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="mysql">Mysql</h3>
+
+<p>mysql에서는 다양한 방식으로 위 문제를 해결할 수 있다. 이 중에서 가장 효율적인 방법은 insert into 쿼리문에 on duplicate key clause를 추가하는 것이다.</p>
+
+<ul>
+  <li>중복되는 row를 특정 값으로 업데이트 할 때</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">(</span><span class="nv">``</span><span class="n">col1_name</span><span class="nv">``</span><span class="p">,</span> <span class="nv">``</span><span class="n">col2_name</span><span class="nv">``</span><span class="p">,</span> <span class="nv">``</span><span class="n">col2_name</span><span class="nv">``</span><span class="p">,</span> <span class="p">...)</span> 
+		<span class="k">VALUES</span> 
+			<span class="p">(</span><span class="n">value11</span><span class="p">,</span> <span class="n">value12</span><span class="p">,</span> <span class="n">value13</span> <span class="p">,....),</span> 
+			<span class="p">(</span><span class="n">value21</span><span class="p">,</span> <span class="n">value22</span><span class="p">,</span> <span class="n">value23</span> <span class="p">,....)</span>
+    <span class="k">ON</span> <span class="n">DUPLICATE</span> <span class="k">KEY</span> 
+		<span class="k">UPDATE</span> 
+  	  <span class="n">col_name</span> <span class="o">=</span> <span class="n">special_value1</span><span class="p">,</span>
+      <span class="n">col_name</span> <span class="o">=</span> <span class="n">special_value2</span><span class="p">,</span>
+      <span class="n">col_name</span> <span class="o">=</span> <span class="n">special_value3</span>
+<span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>전부 새로운 값으로 업데이트 할 때
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">(</span><span class="nv">``</span><span class="n">col1_name</span><span class="nv">``</span><span class="p">,</span> <span class="nv">``</span><span class="n">col2_name</span><span class="nv">``</span><span class="p">,</span> <span class="nv">``</span><span class="n">col2_name</span><span class="nv">``</span><span class="p">,</span> <span class="p">...)</span> 
+      <span class="k">VALUES</span> 
+          <span class="p">(</span><span class="n">value11</span><span class="p">,</span> <span class="n">value12</span><span class="p">,</span> <span class="n">value13</span> <span class="p">,....),</span> 
+          <span class="p">(</span><span class="n">value21</span><span class="p">,</span> <span class="n">value22</span><span class="p">,</span> <span class="n">value23</span> <span class="p">,....)</span>
+  <span class="k">ON</span> <span class="n">DUPLICATE</span> <span class="k">KEY</span> 
+      <span class="k">UPDATE</span> 
+	  <span class="n">col_name</span> <span class="o">=</span> <span class="k">VALUES</span><span class="p">(</span><span class="nv">``</span><span class="n">col1_name</span><span class="nv">``</span><span class="p">),</span>
+    <span class="n">col_name</span> <span class="o">=</span> <span class="k">VALUES</span><span class="p">(</span><span class="nv">``</span><span class="n">col2_name</span><span class="nv">``</span><span class="p">),</span>
+    <span class="n">col_name</span> <span class="o">=</span> <span class="k">VALUES</span><span class="p">(</span><span class="nv">``</span><span class="n">col3_name</span><span class="nv">``</span><span class="p">)</span>
+<span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="gorm">GORM</h3>
+
+<p>gorm에서는 OnConflict 객체를 db.Clauses에 추가하는 방식으로 기능을 구현하였다. <code class="highlighter-rouge">DoNothing</code>, <code class="highlighter-rouge">DoUpdates</code> ,<code class="highlighter-rouge">UpdateAll</code> 으로 원하는 방식을 결정한다.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">type</span> <span class="n">OnConflict</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">Columns</span>      <span class="p">[]</span><span class="n">Column</span>
+    <span class="n">Where</span>        <span class="n">Where</span>
+    <span class="n">TargetWhere</span>  <span class="n">Where</span>
+    <span class="n">OnConstraint</span> <span class="kt">string</span>
+    <span class="n">DoNothing</span>    <span class="kt">bool</span>
+    <span class="n">DoUpdates</span>    <span class="n">Set</span>
+    <span class="n">UpdateAll</span>    <span class="kt">bool</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>claused.OnConflict 객체를 생성하여 쿼리문에 넣어준다.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">err</span> <span class="o">:=</span> <span class="n">db</span><span class="o">.</span><span class="n">Clauses</span><span class="p">(</span><span class="n">clause</span><span class="o">.</span><span class="n">OnConflict</span><span class="p">{</span>
+		<span class="n">Columns</span><span class="o">:</span>   <span class="p">[]</span><span class="n">clause</span><span class="o">.</span><span class="n">Column</span><span class="p">,</span>
+		<span class="n">UpdateAll</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+	<span class="p">})</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">datas</span><span class="p">)</span><span class="o">.</span><span class="n">Error</span>
+</code></pre></div></div>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://stackoverflow.com/questions/9537710/is-there-a-way-to-use-on-duplicate-key-to-update-all-that-i-wanted-to-insert">https://stackoverflow.com/questions/9537710/is-there-a-way-to-use-on-duplicate-key-to-update-all-that-i-wanted-to-insert</a></li>
+  <li><a href="https://stackoverflow.com/questions/39333102/how-to-create-or-update-a-record-with-gorm">https://stackoverflow.com/questions/39333102/how-to-create-or-update-a-record-with-gorm</a></li>
+  <li><a href="https://gorm.io/docs/sql_builder.html#Clauses">https://gorm.io/docs/sql_builder.html#Clauses</a></li>
+</ul>
+
+	</div>
+	<br/>
+	<br/>
+	<script src="https://utteranc.es/client.js"
+        repo="deagwon97/deagwon97.github.io"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+	</script>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

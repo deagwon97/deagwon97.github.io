@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="bdg-blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>bdg-blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/">bdg-blog</a>
+	</div>
+	<p class="lead"></p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#쿠버네티스">
+				<span class="name">쿠버네티스</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#기타">
+				<span class="name">기타</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#운영체제/컴퓨터구조">
+				<span class="name">운영체제/컴퓨터구조</span>
+				<span class="badge">7</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#백앤드">
+				<span class="name">백앤드</span>
+				<span class="badge">5</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#컨테이너">
+				<span class="name">컨테이너</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Go">
+				<span class="name">Go</span>
+				<span class="badge">6</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 아키텍쳐">
+				<span class="name">클린 아키텍쳐</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#보안">
+				<span class="name">보안</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#리눅스">
+				<span class="name">리눅스</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#네트워크">
+				<span class="name">네트워크</span>
+				<span class="badge">4</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#자바스크립트">
+				<span class="name">자바스크립트</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#클린 코드">
+				<span class="name">클린 코드</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			프로세스란?
+		</div>
+		<time class="post-date dt-published" datetime="2023-07-26T19:31:09+09:00" itemprop="datePublished">2023/07/26
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>리눅스의 <code class="highlighter-rouge">ps -ef</code>이라는 명령어는 현재 실행중인 프로세스의 목록과 상태를 보여준다. 이 명령어를 통해서 지금 컴퓨터가 CPU자원을 어디에 쓰고 있는지 확인할 수 있다. 그렇다면 이 프로세스라는 것은 무엇일까?</p>
+
+<h2 id="0-프로그램이란">0. 프로그램이란?</h2>
+<p>먼저 프로그램에 대해서 정의하자.</p>
+<blockquote>
+  <p><em>Computer Program은 소스코드의 인간이 이해할 수 있는 형태이다.
+ wikipedia</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>Program은 특정 함수를 수행하기위해 컴퓨터가 사용하는 명령들의 집합이다.
+ webopedia</em></p>
+</blockquote>
+
+<p>여러 글들을 읽어보면 결국 프로그램은 <strong>컴퓨터가 특정 동작을 수행하기위해 작성된 실행가능한 코드</strong>을 의미한다.</p>
+
+<p>## 1. 프로세스란?</p>
+
+<blockquote>
+  <p><em>Process란 하나 혹은 그 이상의 Thread로 실행되는 컴퓨터 프로그램의 instance이다. Process는 Program code와 그 activity를 포함한다.
+ wikipedia</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>프로세스는 가상 메모리 공간, 코드, 데이터, 시스템 자원의 집합이다. 
+microsoft</em></p>
+</blockquote>
+
+<p>프로세스는 운영체제가 프로그램을 실행하기 위해 필요한 가장 작은 단위의 쓰레드, 메모리, 소스코드들의 집합이며 프로그램 동작 그 자체를 의미한다.  운영체제는  “프로세스”를 작업의 단위로 보고 자원들을 작업(프로세스)들에 적절하게 분배한다.</p>
+<h2 id="2-process의-상태-process-states">2. Process의 상태 (Process States)</h2>
+
+<p><img alt="image" src="/images/e94565ba-513d-462a-805f-27f13bf513b2" /></p>
+
+<ul>
+  <li><strong>New</strong>
+ 	- 프로세스가 생성되는 도중의 상태이다.</li>
+  <li><strong>Ready</strong>
+ 	- 프로세스(process)가 생성된 후, 프로세서(processor)에 할당되기를 기다리는 상태이다.</li>
+  <li><strong>Runing</strong>
+ 	- instruction이 실행되는 상태이다.
+    <ul>
+      <li>프로세서(processor)에 할당되어 있다.</li>
+    </ul>
+  </li>
+  <li><strong>Wait</strong>
+ 	- process가 특정 이벤트(I/O완료, 특정 신호 수신)을 기다리는 상태이다.
+    <ul>
+      <li>프로세서(processor)에 할당되어 있지만 프로세서의 클락을 낮추거나 일시적으로 멈춤으로써 에너지 소비를 줄일 수 있는 상태이다.</li>
+    </ul>
+  </li>
+  <li><strong>Terminated</strong>
+ 	process 종료된 상태</li>
+</ul>
+
+<h2 id="3-프로세스의-구성">3. 프로세스의 구성</h2>
+<h3 id="프로세스-메모리process-memeory">프로세스 메모리(Process Memeory)</h3>
+
+<p>운영체제는 프로세스 마다 고유의 가상 메모리공간을 제공한다. 이러한 메모리 공간은 다시 data section, text section, stack/heap section등 으로 세분화된다.</p>
+
+<p><img alt="image" src="/images/bed5a320-9385-46ea-8af9-094cbe97ca6f" /></p>
+
+<ul>
+  <li><strong>Stack</strong>
+    <ul>
+      <li>매개변수, 지역변수, return 주소 등과 같은 데이터를 저장하는 영역이다.</li>
+      <li>컴파일러에 의해 Run Time 도중 크기가 결정되며, 함수가 호출&amp;종료 되는 시점에 생성&amp;제거된다.</li>
+    </ul>
+  </li>
+  <li><strong>Heap</strong>
+    <ul>
+      <li>new, delete, malloc, free 등을 호출하여 데이터를 저장&amp;관리하는 영역</li>
+      <li>Run time에 크기가 결정</li>
+    </ul>
+  </li>
+  <li><strong>Data Section</strong>
+    <ul>
+      <li>사전에 선언된 데이터가 저장되는 영역 (global static variables, etc)</li>
+      <li>Compile time에 크기가 결정된다.</li>
+      <li>내부에서 DATA &amp; BBS 영역으로 구분된다.</li>
+      <li>initialized data section : 초기화된 전역 변수가 저장되는 영역(DATA)</li>
+      <li>uninitialized data section : 초기화되지 않은 전역 변수가 저장되는 영역(BBS)</li>
+    </ul>
+  </li>
+  <li><strong>Instruction(Text Section)</strong>
+    <ul>
+      <li>컴파일된 기계어가 저장되는 영역</li>
+      <li>Compile time에 크기가 결정된다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="process-control-block-pcb">Process Control Block (PCB)</h3>
+<p>Process 마다 현재 상태를 하나의 데이터 구조에 저장하여 관리하는데, 이를 Process Control Block(PCB)라고 부른다. 이러한 PCB는 다른 프로세스들이 쉽게 접근할 수 없고, Kernel영역에 저장된다.</p>
+
+<p>이화여자대학교 반효경교수님의 “운영체제와 정보기술의 원리”를 인용하면,</p>
+
+<blockquote>
+  <p>… 운영체제도 하나의 프로그램이므로 운영체제 커널 역시 코드, 데이터, 스택의 주소 공간 구성을 가진다. … 커널의 데이터 영역에는 각종 자원을 관리하기 위한 자료구조가 저장된다. … 커널의 데이터 영역 내에는 각 프로세스의 상태, CPU 사용 정보, 메모리 사용정보 등을 유지하기 위한 자료구조인 PCB를 두고 있다. …(중략)</p>
+</blockquote>
+
+<p>Process Control Block은 커널의 데이터 영역 내에 존재한다.</p>
+
+<p><img alt="image" src="/images/db52f1e5-4d31-47db-a4aa-f3c3d350a61c" /></p>
+
+<p>이러한 PCB에는 구체적으로 다음과 같은 정보들이 저장되어 있다.</p>
+
+<ul>
+  <li><strong>현재 Process State</strong>
+  New, Ready, Wait, Running, Terminated</li>
+  <li><strong>Process ID, Parent Process ID</strong></li>
+  <li><strong>CPU registers</strong>
+  프로세스의 레지스터 상태를 저장하는 공간</li>
+  <li><strong>Program Counter</strong>
+  프로세스에서 실행되야할 다음 instruction의 주소</li>
+  <li><strong>CPU Scheduling 정보</strong>
+  CPU Scheduling에 필요한 우선순위 및 scheduling queues의 pointer</li>
+  <li><strong>Memory 관리 정보</strong>
+  프로세스 내부에서 사용되는 메모리주소를 실제 물리적 메모리 주소로 변환하는데 필요한 테이블 데이터
+  ex)
+    <ul>
+      <li>페이지 테이블
+   페이징 프로세스의 메모리 주소를 관리할 때 프로세스의 페이지 정보({페이지 번호: 페이지에 해당하는 데이터의 실제 물리 주소})를 저장하고 있는 테이블이다.</li>
+      <li>세그멘트 테이블
+   프로세스를 논리적내용으로 잘라 메모리에 배치하는 방식을 세그멘테이션이라고 한다. 세그멘트 테이블은 이 세그멘트들의 실제 물리적 메모리 주소 정보를 담고 있다.((base: , limit)쌍으로 이루워졌다.)</li>
+    </ul>
+  </li>
+  <li><strong>Accounting 정보</strong>
+  process 를 실행한 user의 정보.</li>
+  <li><strong>I/O 상태 정보</strong>
+  process에 할당된 물리적 장치 및 프로세스가 읽고 있는 파일에 관한 정보.</li>
+</ul>
+
+<p>PCB는 현재  프로세스가 instruction의 어떤 곳 까지 실행하였는지, register에는 어떤 값들이 저장되어 있는지 등 현재 시점의 모든 상태를 가지고 있다.
+ 따라서 운영체제의 scheduler가 현재 프로세스를 정지하고 다른 프로세스를 Dispatch하기 전에 현재 프로세스의 상태를 PCB에 저장한다면,
+ 다시 원래 프로세스의 실행 순서가 돌아 왔을 때, 이전에 하던 작업을 PCB를 통해 그대로 복원할 수 있다.</p>
+
+<p>## Reference</p>
+<ul>
+  <li>https://www.studytonight.com/operating-system/operating-system-processes</li>
+  <li>https://docs.microsoft.com/en-us/windows/win32/com/processes–threads–and-apartments</li>
+  <li>https://en.wikipedia.org/wiki/Wait_state</li>
+  <li>https://ko.wikipedia.org/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80_%ED%85%8C%EC%9D%B4%EB%B8%94</li>
+</ul>
+
+	</div>
+	<br/>
+	<br/>
+	<script src="https://utteranc.es/client.js"
+        repo="deagwon97/deagwon97.github.io"
+        issue-term="url"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+	</script>
+</article>
+		</div>
+	</div>
+  </body>
+</html>
